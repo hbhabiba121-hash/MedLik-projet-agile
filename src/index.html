@@ -1,10 +1,11 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEDLik - Accueil</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
@@ -13,8 +14,8 @@
             <ul class="nav-menu">
                 <li class="active"><a href="index.html">Accueil</a></li>
                 <li><a href="pages/practices.html">Bonnes pratiques</a></li>
-          <li><a href="pages/progress.html">Suivi de progression</a></li>
-                <li><a href="#">Communauté</a></li>
+                <li><a href="pages/progress.html">Suivi de progression</a></li>
+                <li><a href="pages/publish-practice.html">Communauté</a></li>
                 <li><a href="#">Aide</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
@@ -26,14 +27,68 @@
         <p style="margin-bottom: 2rem; color: #666;">
             Votre compagnon pour la préparation au concours médical
         </p>
-        <div style="margin-top: 2rem;">
-            <a href="pages/practice-detail.html" class="btn-follow" 
-               style="text-decoration: none; display: inline-block;">
-                Tester les fonctionnalités MP-4, MP-6, MP-7
+        
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 2rem auto;">
+            <!-- Bouton principal pour ajouter une pratique -->
+            <a href="pages/publish-practice.html" class="btn-follow" 
+               style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px;
+                      background: linear-gradient(135deg, #3498db, #2980b9); padding: 1rem; border-radius: 8px; color: white; font-weight: 600;">
+                <i class="fas fa-plus-circle"></i>
+                <span>Ajouter une bonne pratique</span>
+            </a>
+            
+            <!-- Bouton pour voir les bonnes pratiques -->
+            <a href="pages/practices.html" class="btn-follow" 
+               style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px;
+                      background: linear-gradient(135deg, #2c3e50, #34495e); padding: 1rem; border-radius: 8px; color: white; font-weight: 600;">
+                <i class="fas fa-book-medical"></i>
+                <span>Explorer les bonnes pratiques</span>
+            </a>
+            
+            <!-- Bouton pour voir la progression -->
+            <a href="pages/progress.html" class="btn-follow" 
+               style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px;
+                      background: linear-gradient(135deg, #4CAF50, #45a049); padding: 1rem; border-radius: 8px; color: white; font-weight: 600;">
+                <i class="fas fa-chart-line"></i>
+                <span>Voir ma progression</span>
             </a>
         </div>
+        
+        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.1rem;">
+                <i class="fas fa-info-circle" style="color: #3498db;"></i>
+                Fonctionnalités principales
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left;">
+                <div>
+                    <h4 style="color: #3498db; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-plus-circle"></i> Ajout de pratiques
+                    </h4>
+                    <p style="color: #666; font-size: 0.85rem; margin: 0;">
+                        Partagez vos bonnes pratiques avec la communauté
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color: #2c3e50; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-book-medical"></i> Bibliothèque
+                    </h4>
+                    <p style="color: #666; font-size: 0.85rem; margin: 0;">
+                        Accédez à des centaines de bonnes pratiques
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color: #4CAF50; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-chart-line"></i> Suivi
+                    </h4>
+                    <p style="color: #666; font-size: 0.85rem; margin: 0;">
+                        Visualisez votre progression avec des statistiques détaillées
+                    </p>
+                </div>
+            </div>
+        </div>
+        
         <p style="margin-top: 2rem; color: #888; font-size: 0.9rem;">
-            Naviguez vers "Bonnes pratiques" pour tester les fonctionnalités de suivi et progression
+            Commencez par ajouter votre première bonne pratique !
         </p>
     </main>
 </body>
