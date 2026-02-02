@@ -1,107 +1,152 @@
-// Fonctionnalité MP-4 : Suivre une bonne pratique
+// MP-6 spécifique : Retirer une bonne pratique de mes objectifs
 document.addEventListener('DOMContentLoaded', function() {
     const followBtn = document.getElementById('follow-btn');
-    const followIcon = followBtn.querySelector('i');
-    const followText = followBtn.querySelector('span');
+    const PRACTICE_ID = 'time-management';
     
-    // Vérifie si l'utilisateur suit déjà cette pratique
-    let isFollowing = localStorage.getItem('following-time-management') === 'true';
+    // État initial : vérifie si déjà suivi
+    let isFollowing = localStorage.getItem(`medlik_${PRACTICE_ID}_following`) === 'true';
     
-    // Met à jour l'état initial du bouton
+    // Initialisation
     updateButtonState();
     
-    // Gestionnaire d'événement pour le bouton
+    // Gestion du clic
     followBtn.addEventListener('click', function() {
-        isFollowing = !isFollowing;
-        
-        // Sauvegarde dans le localStorage
         if (isFollowing) {
-            localStorage.setItem('following-time-management', 'true');
-            showNotification('✅ Bonne pratique ajoutée à vos objectifs !');
+            // MP-6: RETIRER la bonne pratique
+            removeFromObjectives();
         } else {
-            localStorage.removeItem('following-time-management');
-            showNotification('❌ Bonne pratique retirée de vos objectifs.');
+            // MP-4: AJOUTER la bonne pratique
+            addToObjectives();
         }
         
-        // Met à jour l'apparence du bouton
+        isFollowing = !isFollowing;
         updateButtonState();
-        
-        // Animation de feedback
-        animateButton();
     });
     
+    // MP-6: Fonction pour retirer
+    function removeFromObjectives() {
+        localStorage.removeItem(`medlik_${PRACTICE_ID}_following`);
+        
+        // Log pour débogage
+        console.log('MP-6: Bonne pratique retirée des objectifs');
+        
+        // Notification spécifique MP-6
+        showRemovalNotification();
+        
+        // Mettre à jour d'autres parties si nécessaire
+        updateRelatedComponents();
+    }
+    
+    // MP-4: Fonction pour ajouter (déjà faite)
+    function addToObjectives() {
+        localStorage.setItem(`medlik_${PRACTICE_ID}_following`, 'true');
+        console.log('MP-4: Bonne pratique ajoutée aux objectifs');
+        showAdditionNotification();
+    }
+    
+    // Mise à jour du bouton
     function updateButtonState() {
         if (isFollowing) {
+            // État "Retirer"
+            followBtn.innerHTML = '<i class="fas fa-times-circle"></i> Retirer de mes objectifs';
             followBtn.classList.add('active');
-            followIcon.className = 'fas fa-bookmark';
-            followText.textContent = 'Retirer de mes objectifs';
+            followBtn.title = "Cliquez pour retirer cette bonne pratique de vos objectifs";
         } else {
+            // État "Ajouter"
+            followBtn.innerHTML = '<i class="far fa-bookmark"></i> Ajouter à mes objectifs';
             followBtn.classList.remove('active');
-            followIcon.className = 'far fa-bookmark';
-            followText.textContent = 'Ajouter à mes objectifs';
+            followBtn.title = "Cliquez pour ajouter cette bonne pratique à vos objectifs";
         }
     }
     
-    function animateButton() {
-        followBtn.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            followBtn.style.transform = 'scale(1)';
-        }, 150);
-    }
-    
-    function showNotification(message) {
-        // Crée une notification temporaire
+    // Notification spécifique pour MP-6
+    function showRemovalNotification() {
         const notification = document.createElement('div');
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: ${isFollowing ? '#4CAF50' : '#f44336'};
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 1000;
-            animation: slideIn 0.3s ease-out;
+        notification.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #f44336;
+                color: white;
+                padding: 1rem;
+                border-radius: 6px;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            ">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <strong>Bonne pratique retirée</strong>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">
+                        Elle n'apparaîtra plus dans votre suivi de progression
+                    </div>
+                </div>
+            </div>
         `;
         
         document.body.appendChild(notification);
         
-        // Supprime la notification après 3 secondes
         setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease-out';
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
+            notification.style.opacity = '0';
+            notification.style.transition = 'opacity 0.5s';
+            setTimeout(() => document.body.removeChild(notification), 500);
         }, 3000);
     }
     
-    // Ajoute les styles d'animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Simulation de progression dans les bénéfices
-    const checkboxes = document.querySelectorAll('.benefit-item input');
-    checkboxes.forEach((checkbox, index) => {
-        // Simule un état aléatoire pour la démo
-        const isChecked = Math.random() > 0.5;
-        checkbox.checked = isChecked;
+    function showAdditionNotification() {
+        // Notification pour MP-4 (similaire)
+        const notification = document.createElement('div');
+        notification.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 1rem;
+                border-radius: 6px;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            ">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <strong>Bonne pratique ajoutée</strong>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">
+                        Vous pouvez la retrouver dans votre suivi de progression
+                    </div>
+                </div>
+            </div>
+        `;
         
-        // Change la couleur si coché
-        if (isChecked) {
-            checkbox.parentElement.style.background = '#e8f5e9';
-            checkbox.parentElement.style.borderLeft = '3px solid #4CAF50';
-        }
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transition = 'opacity 0.5s';
+            setTimeout(() => document.body.removeChild(notification), 500);
+        }, 3000);
+    }
+    
+    function updateRelatedComponents() {
+        // Pour MP-7 (future intégration)
+        console.log('MP-6: Mise à jour des composants liés après retrait');
+        // Ici, tu pourras ajouter la mise à jour de la progression
+    }
+    
+    // Gestion des bénéfices
+    const checkboxes = document.querySelectorAll('.benefit-item input');
+    checkboxes.forEach(checkbox => {
+        const saved = localStorage.getItem(`benefit_${checkbox.id}`);
+        if (saved) checkbox.checked = saved === 'true';
+        
+        checkbox.addEventListener('change', function() {
+            localStorage.setItem(`benefit_${this.id}`, this.checked);
+        });
     });
 });
