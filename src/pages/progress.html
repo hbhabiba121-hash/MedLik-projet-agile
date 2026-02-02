@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDLik - Suivi de progression</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">MEDLik</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="practices.html">Bonnes pratiques</a></li>
+                <li class="active"><a href="progress.html">Suivi de progression</a></li>
+                <li><a href="#">Communauté</a></li>
+                <li><a href="#">Aide</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- En-tête -->
+        <header class="progress-header">
+            <h1>Suivi de progression</h1>
+            <p class="subtitle">Visualisez votre évolution et atteignez vos objectifs de préparation</p>
+            
+            <!-- Filtres -->
+            <div class="progress-filters">
+                <button class="filter-btn active">Jour</button>
+                <button class="filter-btn">Semaine</button>
+                <button class="filter-btn">Mois</button>
+            </div>
+        </header>
+
+        <!-- Stats globales -->
+        <section class="global-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #4a6491;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="study-hours">42h</div>
+                        <div class="stat-label">Heures d'étude</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #4CAF50;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="completed-objectives">0/2</div>
+                        <div class="stat-label">Objectifs complétés</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #2196F3;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="average-progress">0%</div>
+                        <div class="stat-label">Progression moyenne</div>
+                        <div class="stat-trend" id="progress-trend">+5%</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #ff9800;">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="inprogress-count">2</div>
+                        <div class="stat-label">En cours</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section : Mes objectifs personnels -->
+        <section class="objectives-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bullseye"></i> Mes objectifs personnels</h2>
+                <button class="add-btn" id="add-objective-btn">
+                    <i class="fas fa-plus"></i> Ajouter
+                </button>
+            </div>
+            
+            <!-- Liste des objectifs (REMPLIE DYNAMIQUEMENT) -->
+            <div class="objectives-list" id="objectives-list">
+                <!-- Les objectifs apparaîtront ici via JavaScript -->
+                <div class="empty-state">
+                    <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                    <p>Aucun objectif pour le moment</p>
+                    <p style="color: #888; font-size: 0.9rem; margin-top: 0.5rem;">
+                        Ajoutez des bonnes pratiques à vos objectifs pour les voir apparaître ici
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Message d'encouragement -->
+        <section class="encouragement-section">
+            <div class="encouragement-card">
+                <div class="encouragement-content">
+                    <h3><i class="fas fa-trophy"></i> Continuer comme ça !</h3>
+                    <p id="encouragement-text">
+                        Vous avez <span id="completed-count">0</span> objectif complété. La régularité est la clé de la réussite !
+                    </p>
+                </div>
+                <div class="encouragement-progress">
+                    <div class="progress-circle">
+                        <div class="circle" id="progress-circle">
+                            <span id="circle-percentage">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-label">de progression moyenne</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li><a href="practices.html">Bonnes pratiques</a></li>
+                    <li><a href="progress.html">Suivi de progression</a></li>
+                    <li><a href="#">Communauté</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Suivez-nous</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script MP-7 -->
+    <script src="../js/progress.js"></script>
+</body>
+</html>

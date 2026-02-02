@@ -1,130 +1,193 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDLik - Détail Bonne Pratique</title>
+    <title>MEDLik - Bonne Pratique</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">MEDLik</div>
             <ul class="nav-menu">
-                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li class="active"><a href="practices.html"><i class="fas fa-star"></i> Bonnes pratiques</a></li>
-                <li><a href="#"><i class="fas fa-chart-line"></i> Suivi de progression</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Communauté</a></li>
-                <li><a href="#"><i class="fas fa-question-circle"></i> Aide</a></li>
-                <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="../index.html">Accueil</a></li>
+                <li class="active"><a href="practices.html">Bonnes pratiques</a></li>
+                <li><a href="#">Suivi de progression</a></li>
+                <li><a href="#">Communauté</a></li>
+                <li><a href="#">Aide</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Contenu principal -->
     <main class="container">
-        <div class="breadcrumb">
-            <a href="practices.html">Bonnes pratiques</a> > 
-            <a href="#">Techniques d'examen</a> > 
-            <span>Gérer son temps</span>
-        </div>
+        <!-- En-tête -->
+        <header class="practice-header">
+            <h1>Techniques d'examen</h1>
+            <h2>Gérer son temps pendant l'épreuve</h2>
+            <p class="subtitle">Optimisez votre temps le jour du concours</p>
+            
+            <!-- Boutons MP-4 & MP-6 -->
+            <div class="action-buttons">
+                <button id="follow-btn" class="btn-follow">
+                    <i class="far fa-bookmark"></i>
+                    Ajouter à mes objectifs
+                </button>
+                <a href="practices.html" class="btn-back">
+                    Retour
+                </a>
+            </div>
+        </header>
 
-        <article class="practice-detail">
-            <header class="practice-header">
-                <h1>Techniques d'examen</h1>
-                <h2>Gérer son temps pendant l'épreuve</h2>
-                <p class="subtitle">Optimisez votre temps le jour du concours</p>
-                
-                <!--  BOUTON MP-4 ICI -->
-                 <!-- MP-6: Bouton pour retirer une bonne pratique déjà suivie -->
-                <div class="action-buttons">
-                    <button id="follow-btn" class="btn-follow">
-                        <i class="far fa-bookmark"></i>
-                        <span>Ajouter à mes objectifs</span>
-                    </button>
-                    <a href="practices.html" class="btn-back">
-                        <i class="fas fa-arrow-left"></i> Retour
-                    </a>
+        <!-- MP-7: Section Progression -->
+        <section class="progression-section">
+            <h3><i class="fas fa-chart-line"></i> Votre progression</h3>
+            
+            <div class="progress-visualization">
+                <!-- Barre de progression -->
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Progression globale</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span id="progress-count">0 sur 10 bonnes pratiques suivies</span>
+                    </div>
                 </div>
                 
-<!-- MP-6: Message d'information -->
-<div class="info-message" style="margin-top: 1rem; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; font-size: 0.9rem; color: #666;">
-    <i class="fas fa-info-circle"></i> 
-    Vous pouvez ajouter ou retirer cette bonne pratique de vos objectifs à tout moment.
-</div>
-            </header>
-
-            <section class="practice-content">
-                <div class="description">
-                    <h3><i class="fas fa-align-left"></i> Description complète</h3>
-                    <p>Une bonne gestion du temps est essentielle pour répondre à toutes les questions du CNC et maximiser votre score.</p>
+                <!-- Détails de progression -->
+                <div class="progress-details">
+                    <div class="detail-card">
+                        <div class="detail-icon" style="background: #4CAF50;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="detail-info">
+                            <div class="detail-number" id="followed-count">0</div>
+                            <div class="detail-label">Suivies</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <div class="detail-icon" style="background: #ff9800;">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="detail-info">
+                            <div class="detail-number" id="inprogress-count">3</div>
+                            <div class="detail-label">En cours</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <div class="detail-icon" style="background: #f44336;">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="detail-info">
+                            <div class="detail-number" id="remaining-count">10</div>
+                            <div class="detail-label">Restantes</div>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- Message de statut -->
+                <div class="progress-message" id="progress-message">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Commencez par ajouter des bonnes pratiques à vos objectifs</span>
+                </div>
+            </div>
+        </section>
 
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3><i class="fas fa-clock"></i> Durée estimée</h3>
+        <!-- Description complète -->
+        <section class="section">
+            <h3><i class="fas fa-align-left"></i> Description complète</h3>
+            <p>Une bonne gestion du temps est essentielle pour répondre à toutes les questions du CNC et maximiser votre score.</p>
+        </section>
+
+        <hr>
+
+        <!-- Informations -->
+        <section class="section">
+            <h3><i class="fas fa-info-circle"></i> Informations</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div style="font-size: 20px; color: #4a6491;">1️⃣</div>
+                    <div>
+                        <h4>Durée estimée</h4>
                         <p>S'entraîner sur annales chronométrées</p>
                     </div>
-                    <div class="info-card">
-                        <h3><i class="fas fa-folder"></i> Catégorie</h3>
+                </div>
+                <div class="info-item">
+                    <div style="font-size: 20px; color: #4a6491;">2️⃣</div>
+                    <div>
+                        <h4>Catégorie</h4>
                         <p>Techniques d'examen</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="tips-section">
-                    <h3><i class="fas fa-lightbulb"></i> Conseils pratiques</h3>
-                    <ol class="tips-list">
-                        <li>Lisez toutes les questions en 5 minutes au début</li>
-                        <li>Allouez un temps par question (≈2 min par QCM)</li>
-                        <li>Commencez par les questions que vous maîtrisez</li>
-                        <li>Ne restez pas bloqué plus de 2 minutes sur une question</li>
-                        <li>Gardez 15 minutes pour la relecture finale</li>
-                    </ol>
-                </div>
+        <!-- Conseils pratiques - PAGE 1 -->
+        <section class="section">
+            <h3><i class="fas fa-lightbulb"></i> Conseils pratiques</h3>
+            <ol class="numbered-list">
+                <li>Lisez toutes les questions en 5 minutes au début</li>
+                <li>Allouez un temps par question (≈2 min par QCM)</li>
+            </ol>
+        </section>
 
-                <div class="examples">
-                    <h3><i class="fas fa-list-ol"></i> Exemples concrets</h3>
-                    <div class="example-card">
-                        <h4>Concours de 2h, 60 questions = 2 min max/question</h4>
-                        <ul>
-                            <li><strong>Lecture initiale :</strong> 5 min</li>
-                            <li><strong>Questions faciles/moyennes :</strong> 1h30</li>
-                            <li><strong>Questions difficiles :</strong> 20 min</li>
-                            <li><strong>Relecture :</strong> 15 min</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- Conseils pratiques - PAGE 2 -->
+        <section class="section">
+            <h3><i class="fas fa-lightbulb"></i> Conseils pratiques (suite)</h3>
+            <ol class="numbered-list" start="3">
+                <li>Commencez par les questions que vous maîtrisez</li>
+                <li>Ne restez pas bloqué plus de 2 minutes sur une question</li>
+                <li>Gardez 15 minutes pour la relecture finale</li>
+            </ol>
+        </section>
 
-                <div class="benefits">
-                    <h3><i class="fas fa-check-circle"></i> Bénéfices</h3>
-                    <div class="benefits-list">
-                        <div class="benefit-item">
-                            <input type="checkbox" id="benefit1" checked disabled>
-                            <label for="benefit1">Répondre à toutes les questions</label>
-                        </div>
-                        <div class="benefit-item">
-                            <input type="checkbox" id="benefit2" checked disabled>
-                            <label for="benefit2">Réduction du stress</label>
-                        </div>
-                        <div class="benefit-item">
-                            <input type="checkbox" id="benefit3" disabled>
-                            <label for="benefit3">Score maximal</label>
-                        </div>
-                    </div>
+        <!-- Exemples concrets -->
+        <section class="section">
+            <h3><i class="fas fa-list-alt"></i> Exemples concrets</h3>
+            <div class="example-box">
+                <h4>Concours de 2h, 60 questions = 2 min max/question</h4>
+                <ul>
+                    <li><span>Lecture initiale :</span> <strong>5 min</strong></li>
+                    <li><span>Questions faciles/moyennes :</span> <strong>1h30</strong></li>
+                    <li><span>Questions difficiles :</span> <strong>20 min</strong></li>
+                    <li><span>Relecture :</span> <strong>15 min</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Bénéfices -->
+        <section class="section">
+            <h3><i class="fas fa-check-circle"></i> Bénéfices</h3>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <input type="checkbox" id="benefit1">
+                    <label for="benefit1">Répondre à toutes les questions</label>
                 </div>
-            </section>
-        </article>
+                <div class="benefit-item">
+                    <input type="checkbox" id="benefit2" checked>
+                    <label for="benefit2">Réduction du stress</label>
+                </div>
+                <div class="benefit-item">
+                    <input type="checkbox" id="benefit3">
+                    <label for="benefit3">Score maximal</label>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h4>MEDLik</h4>
-                <p>Votre compagnon pour la préparation au concours médical</p>
-            </div>
             <div class="footer-section">
                 <h4>Navigation</h4>
                 <ul>
@@ -144,15 +207,15 @@
             <div class="footer-section">
                 <h4>Suivez-nous</h4>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Script pour la fonctionnalité MP-4 -->
+    <!-- Script MP-4, MP-6, MP-7 -->
     <script src="../js/practice-detail.js"></script>
 </body>
 </html>
