@@ -259,6 +259,20 @@ document.addEventListener('DOMContentLoaded', function() {
             updateGlobalStats();
         }
     }
+    // Récapitulatif hebdomadaire
+function weeklyProgressSummary() {
+    const allObjectives = [...objectives, ...getFollowedPractices()];
+    const completed = allObjectives.filter(obj => obj.completed).length;
+    const total = allObjectives.length;
+    const avgProgress = total > 0 ? Math.round(allObjectives.reduce((sum, obj) => sum + obj.progress, 0) / total) : 0;
+
+    const message = `Résumé hebdomadaire : ${completed}/${total} objectifs complétés, progression moyenne ${avgProgress}%`;
+    showNotification(message);
+}
+// Appel toutes les 7 jours (7*24*60*60*1000 ms)
+setInterval(weeklyProgressSummary, 7 * 24 * 60 * 60 * 1000);
+
+weeklyProgressSummary();
     
     // Notification
     function showNotification(message) {
