@@ -26,25 +26,42 @@
         
         <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
             <h2 style="color: #4a6491; margin-bottom: 1.5rem; font-size: 1.5rem;">Liste des bonnes pratiques</h2>
+            <div style="margin-bottom: 1.5rem;">
+    <label for="difficultyFilter" style="font-weight: bold; margin-right: 0.5rem;">
+        Trier par difficulté :
+    </label>
+    <select id="difficultyFilter">
+        <option value="all">Toutes</option>
+        <option value="easy">Facile</option>
+        <option value="medium">Moyen</option>
+        <option value="hard">Difficile</option>
+    </select>
+</div>
             
             <div style="margin-bottom: 2rem;">
-                <a href="practice-detail.html" 
-                   style="display: block; padding: 1.5rem; border: 1px solid #ddd; border-radius: 6px; 
+                <a href="practice-detail.html"
+                   class="practice-item"
+                   data-difficulty="medium"
+                   style="display: block; padding: 1.5rem; border: 1px solid #ddd; border-radius: 6px;
                           text-decoration: none; color: #2c3e50; margin-bottom: 1rem;
                           background: #f8f9fa; transition: all 0.2s;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">▶ Gérer son temps pendant l'épreuve</h3>
-                            <p style="color: #666; font-size: 0.95rem;">Techniques d'examen</p>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.25rem;">▶ Gérer son temps pendant l'épreuve</h3>
+                            <span style="font-size: 0.85rem; color: #ff9800; display: inline-block; margin-bottom: 0.5rem;">Difficulté : Moyenne</span>
+                            <p style="color: #666; font-size: 0.95rem; margin-top: 0.25rem;">Techniques d'examen</p>
                         </div>
                         <span style="color: #4a6491; font-weight: bold;">Tester MP-4, MP-6, MP-7 →</span>
                     </div>
                 </a>
-                
-                <div style="padding: 1.5rem; border: 1px solid #ddd; border-radius: 6px; 
-                           background: #f8f9fa; margin-bottom: 1rem; opacity: 0.7;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #888;">▶ Lire attentivement les questions</h3>
-                    <p style="color: #999; font-size: 0.95rem;">Techniques d'examen</p>
+
+                <div class="practice-item"
+                     data-difficulty="easy"
+                     style="padding: 1.5rem; border: 1px solid #ddd; border-radius: 6px;
+                            background: #f8f9fa; margin-bottom: 1rem; opacity: 0.7;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.25rem; color: #888;">▶ Lire attentivement les questions</h3>
+                    <span style="font-size: 0.85rem; color: #4CAF50; display: inline-block; margin-bottom: 0.5rem;">Difficulté : Facile</span>
+                    <p style="color: #999; font-size: 0.95rem; margin-top: 0.25rem;">Techniques d'examen</p>
                 </div>
             </div>
             

@@ -92,16 +92,15 @@
                 </button>
             </div>
             
-            <!-- Liste des objectifs (REMPLIE DYNAMIQUEMENT) -->
-            <div class="objectives-list" id="objectives-list">
-                <!-- Les objectifs apparaîtront ici via JavaScript -->
-                <div class="empty-state">
-                    <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
-                    <p>Aucun objectif pour le moment</p>
-                    <p style="color: #888; font-size: 0.9rem; margin-top: 0.5rem;">
-                        Ajoutez des bonnes pratiques à vos objectifs pour les voir apparaître ici
-                    </p>
-                </div>
+          <div class="objectives-list" id="objectives-list">
+
+  <h3>En cours</h3>
+  <div id="in-progress-list" class="practice-list"></div>
+
+  <h3 style="margin-top: 30px;">Complétées</h3>
+  <div id="completed-list" class="practice-list"></div>
+
+</div>
             </div>
         </section>
 
@@ -124,7 +123,15 @@
                 </div>
             </div>
         </section>
-
+<!-- MP-21 : Section des bonnes pratiques complétées -->
+<section class="completed-practices">
+    <div class="section-header">
+        <h2><i class="fas fa-star"></i> Bonnes pratiques complétées</h2>
+    </div>
+    <ul id="completed-practices-list" class="practice-list">
+        <!-- Les pratiques complétées s'afficheront ici -->
+    </ul>
+</section>
     </main>
 
     <!-- Footer -->

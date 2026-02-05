@@ -320,3 +320,53 @@ document.addEventListener('DOMContentLoaded', function() {
     // Vérifier périodiquement les mises à jour
     setInterval(updateGlobalStats, 5000);
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const practices = [
+    { id: 1, titre: "Faire une pause toutes les 25min", complete: false },
+    { id: 2, titre: "Boire de l’eau", complete: true },
+    { id: 3, titre: "Éviter les distractions", complete: false },
+    { id: 4, titre: "Réviser mes notes du jour", complete: true }
+  ];
+
+  const total = practices.length;
+  const completedCount = practices.filter(p => p.complete).length;
+  const progressPercent = total ? Math.round((completedCount / total) * 100) : 0;
+
+  document.getElementById("average-progress").textContent = `${progressPercent}%`;
+  document.getElementById("circle-percentage").textContent = `${progressPercent}%`;
+  document.getElementById("progress-circle").style.background = `conic-gradient(#4CAF50 ${progressPercent * 3.6}deg, #eee 0deg)`;
+  document.getElementById("completed-objectives").textContent = `${completedCount}/${total}`;
+  document.getElementById("completed-count").textContent = completedCount;
+  document.getElementById("inprogress-count").textContent = total - completedCount;
+
+  const listInProgress = document.getElementById("in-progress-list");
+  const listCompleted = document.getElementById("completed-list");
+
+  listInProgress.innerHTML = "";
+  listCompleted.innerHTML = "";
+
+  practices.forEach(practice => {
+    const item = document.createElement("div");
+    item.className = "practice-item";
+
+    if (practice.complete) {
+      item.innerHTML = `
+        <span class="practice-title">${practice.titre}</span>
+        <span class="complete-icon"><i class="fas fa-check-circle"></i></span>
+      `;
+      listCompleted.appendChild(item);
+    } else {
+      item.innerHTML = `
+        <span class="practice-title">${practice.titre}</span>
+        <button class="mark-btn">Compléter</button>
+      `;
+
+      item.querySelector(".mark-btn").addEventListener("click", () => {
+        practice.complete = true;
+        location.reload(); // refresh to apply change
+      });
+
+      listInProgress.appendChild(item);
+    }
+  });
+});
