@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDLik - Conseils </title>
+    <link rel="stylesheet" href="../css/conseils.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">MEDLik</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="practices.html">Bonnes pratiques</a></li>
+                <li><a href="#">Suivi de progression</a></li>
+                <li><a href="#">Communauté</a></li>
+                <li class="active"><a href="conseils.html">Conseils</a></li>
+                <li><a href="#">Aide</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="container">
+        <h1 class="page-title">Conseils Préparation Concours Médical</h1>
+        
+        <!-- Section pour ajouter un conseil -->
+        <section class="add-advice-section">
+            <h2 class="section-title">Partagez votre expérience</h2>
+            <form id="adviceForm">
+                <div class="form-group">
+                    <label for="adviceTitle">Titre du conseil</label>
+                    <input type="text" id="adviceTitle" placeholder="Ex: Ma méthode de révision en anatomie" required>
+                </div>
+                <div class="form-group">
+                    <label for="adviceContent">Description du conseil</label>
+                    <textarea id="adviceContent" rows="4" placeholder="Décrivez votre méthode, astuce ou expérience en détail..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="adviceCategory">Catégorie</label>
+                    <select id="adviceCategory" required>
+                        <option value="">Sélectionnez une catégorie</option>
+                        <option value="methodes-revision">Méthodes de révision</option>
+                        <option value="planification">Planification du temps</option>
+                        <option value="gestion-stress">Gestion du stress</option>
+                        <option value="sante-forme">Santé & Forme physique</option>
+                        <option value="qcm-exercices">Techniques QCM & Exercices</option>
+                        <option value="ressources-outils">Ressources & Outils</option>
+                        <option value="jour-examen">Jour de l'examen</option>
+                        <option value="motivation">Motivation & Mental</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-add">
+                    <i class="fas fa-share-square"></i> Publier ce conseil
+                </button>
+            </form>
+        </section>
+
+        <!-- Section des conseils existants -->
+        <section class="advices-section">
+            <h2 class="section-title">Conseils partagés par la communauté</h2>
+            <div id="advicesContainer" class="advices-grid">
+                <!-- Les conseils seront ajoutés ici dynamiquement -->
+            </div>
+        </section>
+    </main>
+
+
+    <script src="../js/conseils.js"></script>
+</body>
+</html>
