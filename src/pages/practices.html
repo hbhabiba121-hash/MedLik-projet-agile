@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEDLik - Bonnes pratiques</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -13,8 +14,9 @@
             <ul class="nav-menu">
                 <li><a href="../index.html">Accueil</a></li>
                 <li class="active"><a href="practices.html">Bonnes pratiques</a></li>
-                <li><a href="#">Suivi de progression</a></li>
+                <li><a href="progress.html">Suivi de progression</a></li>
                 <li><a href="#">Communauté</a></li>
+                <li><a href="pages/conseils.html">Conseils</a></li>
                 <li><a href="#">Aide</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
@@ -23,36 +25,103 @@
 
     <main class="container" style="padding: 2rem;">
         <h1 style="color: #2c3e50; margin-bottom: 2rem;">Bonnes pratiques</h1>
-        
-        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-            <h2 style="color: #4a6491; margin-bottom: 1.5rem; font-size: 1.5rem;">Liste des bonnes pratiques</h2>
-            
-            <div style="margin-bottom: 2rem;">
-                <a href="practice-detail.html" 
-                   style="display: block; padding: 1.5rem; border: 1px solid #ddd; border-radius: 6px; 
-                          text-decoration: none; color: #2c3e50; margin-bottom: 1rem;
-                          background: #f8f9fa; transition: all 0.2s;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">▶ Gérer son temps pendant l'épreuve</h3>
-                            <p style="color: #666; font-size: 0.95rem;">Techniques d'examen</p>
-                        </div>
-                        <span style="color: #4a6491; font-weight: bold;">Tester MP-4, MP-6, MP-7 →</span>
-                    </div>
-                </a>
-                
-                <div style="padding: 1.5rem; border: 1px solid #ddd; border-radius: 6px; 
-                           background: #f8f9fa; margin-bottom: 1rem; opacity: 0.7;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #888;">▶ Lire attentivement les questions</h3>
-                    <p style="color: #999; font-size: 0.95rem;">Techniques d'examen</p>
-                </div>
-            </div>
-            
-            <p style="color: #666; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 1rem;">
-                <i class="fas fa-info-circle" style="color: #4a6491;"></i>
-                Cliquez sur une bonne pratique pour voir les détails et tester les fonctionnalités
-            </p>
-        </div>
+       <div id="practices-list">
+    <div class="practice-card">
+        <a href="practice-detail.html?id=time-management">
+            <strong>Gérer son temps pendant l'épreuve</strong>
+            <span>Techniques d'examen</span>
+        </a>
+    </div>
+
+    <div class="practice-card">
+        <a href="practice-detail.html?id=stay-calm">
+            <strong>Rester calme sous pression</strong>
+            <span>Gestion du stress</span>
+        </a>
+    </div>
+
+    <div class="practice-card">
+        <a href="practice-detail.html?id=prioritize">
+            <strong>Prioriser les questions faciles</strong>
+            <span>Stratégie</span>
+        </a>
+    </div>
+</div>
+
     </main>
+
+    <script>
+        // Liste des bonnes pratiques
+        const practices = [
+            { id: 'time-management', title: "Gérer son temps pendant l'épreuve", category: 'Techniques d\'examen', description: 'Optimisez votre temps le jour du concours' },
+            { id: 'read-questions', title: "Lire attentivement les questions", category: 'Techniques d\'examen', description: 'Évitez les erreurs par précipitation' },
+            { id: 'stay-calm', title: "Rester calme sous pression", category: 'Gestion du stress', description: 'Respirez et concentrez-vous' },
+            { id: 'prioritize', title: "Prioriser les questions faciles", category: 'Stratégie', description: 'Gagnez du temps sur les questions difficiles' }
+        ];
+
+        const practicesListDiv = document.getElementById('practices-list');
+
+        function loadPractices() {
+            const followed = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+            practicesListDiv.innerHTML = '';
+            
+            practices.forEach(practice => {
+                const isFollowed = followed.includes(practice.id);
+                const div = document.createElement('div');
+                div.className = 'practice-card';
+                div.style.cssText = `
+                    padding: 1.5rem; 
+                    border: 1px solid #ddd; 
+                    border-radius: 6px; 
+                    background: ${isFollowed ? '#d4edda' : '#f8f9fa'};
+                    margin-bottom: 1rem; 
+                    cursor: pointer;
+                    display:flex; justify-content:space-between; align-items:center;
+                    transition: all 0.2s;
+                `;
+                div.innerHTML = `
+                    <div>
+                        <h3 style="margin:0 0 0.3rem 0; font-size:1.1rem;">▶ ${practice.title}</h3>
+                        <p style="margin:0; font-size:0.9rem; color:#666;">${practice.category}</p>
+                    </div>
+                    <div>
+                        <button style="
+                            padding: 0.4rem 0.8rem;
+                            border:none; border-radius:4px;
+                            background:${isFollowed?'#28a745':'#2196F3'};
+                            color:white; cursor:pointer;
+                        ">
+                            ${isFollowed ? 'Suivie' : 'Ajouter'}
+                        </button>
+                    </div>
+                `;
+                const btn = div.querySelector('button');
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleFollowPractice(practice.id);
+                });
+
+               div.addEventListener('click', () => {
+                   window.location.href = `practice-detail.html?id=${practice.id}`;
+});
+
+
+                practicesListDiv.appendChild(div);
+            });
+        }
+
+        function toggleFollowPractice(id) {
+            let followed = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+            if(followed.includes(id)){
+                followed = followed.filter(f => f !== id);
+            } else {
+                followed.push(id);
+            }
+            localStorage.setItem('medlik_followed_practices', JSON.stringify(followed));
+            loadPractices();
+        }
+
+        loadPractices();
+    </script>
 </body>
 </html>
