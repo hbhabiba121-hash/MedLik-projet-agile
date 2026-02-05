@@ -9,38 +9,45 @@ document.addEventListener('DOMContentLoaded', function() {
     const inprogressCount = document.getElementById('inprogress-count');
     const remainingCount = document.getElementById('remaining-count');
     const progressMessage = document.getElementById('progress-message');
-    
+
     // Configuration
     const PRACTICE_ID = 'time-management';
     const TOTAL_PRACTICES = 10;
     const IN_PROGRESS_PRACTICES = 3;
-    
+
     // État initial
     let isFollowing = localStorage.getItem(`medlik_${PRACTICE_ID}_following`) === 'true';
-    
+
     // Initialisation
     initializePage();
-    
-    // MP-4 & MP-6: Gestion du clic sur le bouton
-    followBtn.addEventListener('click', function() {
-        const wasFollowing = isFollowing;
-        isFollowing = !isFollowing;
-        
-        // Sauvegarder l'état
-        if (isFollowing) {
-            localStorage.setItem(`medlik_${PRACTICE_ID}_following`, 'true');
-            console.log('MP-4: Bonne pratique ajoutée aux objectifs');
-        } else {
-            localStorage.removeItem(`medlik_${PRACTICE_ID}_following`);
-            console.log('MP-6: Bonne pratique retirée des objectifs');
-        }
-        
-        // Mettre à jour l'interface
-        updateButtonState();
-        updateProgression(); // MP-7: Mise à jour de la progression
-        showNotification(wasFollowing);
-    });
-    
+
+    // Gestion du clic sur le bouton Ajouter/Retirer
+    followBtn.addEventListener('click', function () {
+    const wasFollowing = isFollowing;
+    isFollowing = !isFollowing;
+
+    if (isFollowing) {
+        localStorage.setItem(`medlik_${PRACTICE_ID}_following`, 'true');
+        addPracticeToProgression(); //  MP-5 AUTO
+    } else {
+        let practices =
+    JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+
+practices = practices.filter(p => p.id !== PRACTICE_ID);
+
+localStorage.setItem(
+    'medlik_followed_practices',
+    JSON.stringify(practices)
+);
+
+localStorage.removeItem(`medlik_${PRACTICE_ID}_following`); //  MP-5 AUTO
+    }
+
+    updateButtonState();
+    updateProgression();
+    showNotification(wasFollowing);
+});
+
     // Initialisation de la page
     function initializePage() {
         updateButtonState();
@@ -48,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         updateProgression();
         setupBenefitsCheckboxes();
     }
-    
-    // MP-4 & MP-6: Mise à jour du bouton
+
+    // Mise à jour du bouton Ajouter/Retirer
     function updateButtonState() {
         if (isFollowing) {
             followBtn.innerHTML = '<i class="fas fa-times-circle"></i> Retirer de mes objectifs';
@@ -61,25 +68,46 @@ document.addEventListener('DOMContentLoaded', function() {
             followBtn.title = "Cliquez pour ajouter cette bonne pratique à vos objectifs";
         }
     }
-    
-    // MP-7: Fonction principale - Mise à jour de la progression
+
+    function addPracticeToProgression() {
+    const practices =
+        JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+
+    const exists = practices.some(p => p.id === PRACTICE_ID);
+    if (exists) return;
+
+    practices.push({
+        id: PRACTICE_ID,
+        title: "Gérer son temps pendant l'épreuve",
+        category: "Techniques d'examen",
+        description: "Optimisez votre temps le jour du concours",
+        progress: 0,
+        deadline: "30/01/2026",
+        addedDate: new Date().toLocaleDateString('fr-FR'),
+        completed: false,
+        source: "practice"
+    });
+
+    localStorage.setItem(
+        'medlik_followed_practices',
+        JSON.stringify(practices)
+    );
+}
+
+    // Mise à jour de la progression
     function updateProgression() {
-        // Calculer les statistiques
         const followed = getFollowedPracticesCount();
         const inProgress = IN_PROGRESS_PRACTICES;
         const remaining = TOTAL_PRACTICES - followed - inProgress;
         const percentage = Math.round((followed / TOTAL_PRACTICES) * 100);
-        
-        // Mettre à jour l'interface
+
         updateProgressBar(percentage);
         updateProgressStats(followed, inProgress, remaining, percentage);
         updateProgressMessage(followed, percentage);
-        
-        // Animation
         animateProgressUpdate();
     }
-    
-    // Simulation des données pour la démo
+
+    // Simulation des données pour démo
     function simulateProgressData() {
         if (!localStorage.getItem('medlik_progress_simulated')) {
             // Simuler 3 autres pratiques suivies
@@ -89,34 +117,20 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('medlik_progress_simulated', 'true');
         }
     }
-    
+
     // Compter le nombre de pratiques suivies
-    function getFollowedPracticesCount() {
-        let count = 0;
-        
-        // Vérifier cette pratique
-        if (localStorage.getItem(`medlik_${PRACTICE_ID}_following`) === 'true') {
-            count++;
-        }
-        
-        // Vérifier les pratiques simulées
-        for (let i = 1; i <= TOTAL_PRACTICES; i++) {
-            if (i !== 0) {
-                if (localStorage.getItem(`medlik_practice_${i}_following`) === 'true') {
-                    count++;
-                }
-            }
-        }
-        
-        return count;
-    }
-    
+    function getFollowedPractices() {
+    return JSON.parse(
+        localStorage.getItem('medlik_followed_practices')
+    ) || [];
+}
+
+
     // Mettre à jour la barre de progression
     function updateProgressBar(percentage) {
         progressFill.style.width = `${percentage}%`;
         progressPercentage.textContent = `${percentage}%`;
-        
-        // Changer la couleur selon le pourcentage
+
         if (percentage < 30) {
             progressFill.style.background = 'linear-gradient(90deg, #f44336, #e53935)';
         } else if (percentage < 70) {
@@ -125,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
             progressFill.style.background = 'linear-gradient(90deg, #4CAF50, #45a049)';
         }
     }
-    
+
     // Mettre à jour les statistiques
     function updateProgressStats(followed, inProgress, remaining, percentage) {
         followedCount.textContent = followed;
@@ -133,12 +147,12 @@ document.addEventListener('DOMContentLoaded', function() {
         remainingCount.textContent = remaining;
         progressCount.textContent = `${followed} sur ${TOTAL_PRACTICES} bonnes pratiques suivies`;
     }
-    
-    // Mettre à jour le message selon la progression
+
+    // Message selon la progression
     function updateProgressMessage(followed, percentage) {
         let message = '';
         let icon = 'fas fa-info-circle';
-        
+
         if (followed === 0) {
             message = 'Commencez par ajouter des bonnes pratiques à vos objectifs';
             icon = 'fas fa-rocket';
@@ -152,19 +166,17 @@ document.addEventListener('DOMContentLoaded', function() {
             message = 'Excellent ! Vous maîtrisez la plupart des bonnes pratiques';
             icon = 'fas fa-trophy';
         }
-        
+
         progressMessage.innerHTML = `<i class="${icon}"></i><span>${message}</span>`;
     }
-    
+
     // Animation lors de la mise à jour
     function animateProgressUpdate() {
-        // Animation de la barre
         progressFill.classList.add('progress-updated');
         setTimeout(() => {
             progressFill.classList.remove('progress-updated');
         }, 500);
-        
-        // Animation des cartes
+
         const detailCards = document.querySelectorAll('.detail-card');
         detailCards.forEach((card, index) => {
             setTimeout(() => {
@@ -175,14 +187,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }, index * 100);
         });
     }
-    
-    // Notification pour MP-4 et MP-6
+
+    // Notification ajout/retrait
     function showNotification(wasFollowing) {
         const action = wasFollowing ? 'retirée' : 'ajoutée';
         const color = wasFollowing ? '#f44336' : '#4CAF50';
         const icon = wasFollowing ? 'fa-times-circle' : 'fa-check-circle';
         const followedCount = getFollowedPracticesCount();
-        
+
         const notification = document.createElement('div');
         notification.innerHTML = `
             <div style="
@@ -210,47 +222,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-        
-        // Ajouter les animations CSS
+
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
+            @keyframes slideIn { from { transform: translateX(100%); opacity:0; } to { transform: translateX(0); opacity:1; } }
+            @keyframes slideOut { from { transform: translateX(0); opacity:1; } to { transform: translateX(100%); opacity:0; } }
         `;
         document.head.appendChild(style);
-        
         document.body.appendChild(notification);
-        
-        // Supprimer après 3 secondes
+
         setTimeout(() => {
             notification.style.animation = 'slideOut 0.3s ease-out';
             setTimeout(() => {
-                if (document.body.contains(notification)) {
-                    document.body.removeChild(notification);
-                }
-                if (document.head.contains(style)) {
-                    document.head.removeChild(style);
-                }
+                if (document.body.contains(notification)) document.body.removeChild(notification);
+                if (document.head.contains(style)) document.head.removeChild(style);
             }, 300);
         }, 3000);
     }
-    
-    // Configuration des cases à cocher des bénéfices
+
+    // Configurer les cases à cocher des bénéfices
     function setupBenefitsCheckboxes() {
         const checkboxes = document.querySelectorAll('.benefit-item input');
         checkboxes.forEach(checkbox => {
             const saved = localStorage.getItem(`benefit_${checkbox.id}`);
             if (saved) checkbox.checked = saved === 'true';
-            
+
             checkbox.addEventListener('change', function() {
                 localStorage.setItem(`benefit_${this.id}`, this.checked);
             });
         });
     }
+    //Supprimer de la progression
+    function removePracticeFromProgression() {
+    let practices =
+        JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+
+    practices = practices.filter(p => p.id !== PRACTICE_ID);
+
+    localStorage.setItem(
+        'medlik_followed_practices',
+        JSON.stringify(practices)
+    );
+}
+
 });
