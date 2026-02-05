@@ -1,6 +1,7 @@
-// MP-7: Gestion de la page "Suivi de progression"
+// MP-7 amélioré avec intégration dynamique des bonnes pratiques
 document.addEventListener('DOMContentLoaded', function() {
-    // Éléments DOM
+
+    /* ===================== DOM ===================== */
     const objectivesList = document.getElementById('objectives-list');
     const addObjectiveBtn = document.getElementById('add-objective-btn');
     const studyHours = document.getElementById('study-hours');
@@ -12,9 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressCircle = document.getElementById('progress-circle');
     const circlePercentage = document.getElementById('circle-percentage');
     const progressTrend = document.getElementById('progress-trend');
-    
-    // Données des objectifs (normalement viendraient d'une API)
-    const objectives = [
+
+    /* ===================== DATA ===================== */
+    const personalObjectives = [
         {
             id: 'weekly-planning',
             title: 'Établir un planning hebdomadaire',
@@ -36,12 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
             completed: false
         }
     ];
-    
-    // Objectifs suivis depuis les bonnes pratiques
-    const followedPractices = [
-        {
-            id: 'time-management',
-            title: 'Gérer son temps pendant l\'épreuve',
+
+    /* ===================== INIT ===================== */
+    loadAllObjectives();
+    updateGlobalStats();
+    setupEventListeners();
+
+    /* ===================== FONCTIONS ===================== */
+
+    // Charger tous les objectifs (personnels + pratiques suivies)
+    function loadAllObjectives() {
+        objectivesList.innerHTML = '';
+        const allObjectives = [...personalObjectives, ...getFollowedPractices()];
+
+        if(allObjectives.length === 0){
+            showEmptyState();
+            return;
+        }
+
+        allObjectives.forEach(obj => {
+            const element = createObjectiveElement(obj);
+            objectivesList.appendChild(element);
+        });
+    }
+
+    // Récupérer dynamiquement les pratiques suivies
+    function getFollowedPractices() {
+        const followedIds = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+        return followedIds.map(id => ({
+            id,
+            title: id === 'time-management' ? 'Gérer son temps pendant l\'épreuve' : id,
             category: 'Techniques d\'examen',
             description: 'Optimisez votre temps le jour du concours',
             progress: 30,
@@ -49,274 +74,157 @@ document.addEventListener('DOMContentLoaded', function() {
             addedDate: '15/01/2026',
             completed: false,
             source: 'practice'
-        }
-    ];
-    
-    // Initialisation
-    loadAllObjectives();
-    updateGlobalStats();
-    setupEventListeners();
-    
-    // Charger tous les objectifs
-    function loadAllObjectives() {
-        objectivesList.innerHTML = '';
-        
-        // Combiner objectifs personnels et pratiques suivies
-        const allObjectives = [...objectives, ...getFollowedPractices()];
-        
-        if (allObjectives.length === 0) {
-            showEmptyState();
-            return;
-        }
-        
-        // Afficher chaque objectif
-        allObjectives.forEach(objective => {
-            const objectiveElement = createObjectiveElement(objective);
-            objectivesList.appendChild(objectiveElement);
-        });
+        }));
     }
-    
-    // Récupérer les pratiques suivies depuis localStorage
-    function getFollowedPractices() {
-        const followed = [];
-        const practiceIds = ['time-management'];
-        
-        practiceIds.forEach(practiceId => {
-            if (localStorage.getItem(`medlik_${practiceId}_following`) === 'true') {
-                followed.push({
-                    id: practiceId,
-                    title: 'Gérer son temps pendant l\'épreuve',
-                    category: 'Techniques d\'examen',
-                    description: 'Optimisez votre temps le jour du concours',
-                    progress: 30,
-                    deadline: '30/01/2026',
-                    addedDate: '15/01/2026',
-                    completed: false,
-                    source: 'practice'
-                });
-            }
-        });
-        
-        return followed;
-    }
-    
-    // Créer l'élément HTML pour un objectif
-    function createObjectiveElement(objective) {
+
+    // Créer élément HTML objectif
+    function createObjectiveElement(obj) {
         const div = document.createElement('div');
         div.className = 'objective-card';
-        div.dataset.id = objective.id;
-        div.dataset.source = objective.source || 'personal';
-        
+        div.dataset.id = obj.id;
+        div.dataset.source = obj.source || 'personal';
+
         div.innerHTML = `
             <div class="objective-header">
                 <div>
-                    <h3 class="objective-title">${objective.title}</h3>
-                    <span class="objective-category">${objective.category}</span>
+                    <h3 class="objective-title">${obj.title}</h3>
+                    <span class="objective-category">${obj.category}</span>
                 </div>
-                ${objective.source === 'practice' ? 
-                    `<button class="delete-btn" data-id="${objective.id}">
+                ${obj.source === 'practice' ? 
+                    `<button class="delete-btn" data-id="${obj.id}">
                         <i class="fas fa-trash"></i> Supprimer
-                    </button>` : 
-                    ''
+                    </button>` : ''
                 }
             </div>
-            
-            ${objective.description ? 
-                `<p class="objective-description">${objective.description}</p>` : 
-                ''
-            }
-            
+            ${obj.description ? `<p class="objective-description">${obj.description}</p>` : ''}
             <div class="objective-progress">
                 <div class="progress-label-small">
                     <span>Progression</span>
-                    <span>${objective.progress}%</span>
+                    <span>${obj.progress}%</span>
                 </div>
                 <div class="progress-bar-small">
-                    <div class="progress-fill-small" style="width: ${objective.progress}%"></div>
+                    <div class="progress-fill-small" style="width: ${obj.progress}%"></div>
                 </div>
             </div>
-            
             <div class="objective-dates">
-                <span><strong>Échéance:</strong> ${objective.deadline}</span>
-                <span><strong>Ajouté le:</strong> ${objective.addedDate}</span>
+                <span><strong>Échéance:</strong> ${obj.deadline}</span>
+                <span><strong>Ajouté le:</strong> ${obj.addedDate}</span>
             </div>
         `;
-        
         return div;
     }
-    
-    // État vide
+
     function showEmptyState() {
         objectivesList.innerHTML = `
             <div class="empty-state">
-                <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                <i class="fas fa-inbox" style="font-size:3rem;color:#ccc;margin-bottom:1rem;"></i>
                 <p>Aucun objectif pour le moment</p>
-                <p style="color: #888; font-size: 0.9rem; margin-top: 0.5rem;">
-                    Ajoutez des bonnes pratiques à vos objectifs pour les voir apparaître ici
+                <p style="color:#888;font-size:0.9rem;margin-top:0.5rem;">
+                    Ajoutez des bonnes pratiques pour les voir apparaître ici
                 </p>
             </div>
         `;
     }
-    
+
     // Mettre à jour les stats globales
     function updateGlobalStats() {
-        const allObjectives = [...objectives, ...getFollowedPractices()];
+        const allObjectives = [...personalObjectives, ...getFollowedPractices()];
         const completed = allObjectives.filter(obj => obj.completed).length;
         const total = allObjectives.length;
-        const totalProgress = allObjectives.reduce((sum, obj) => sum + obj.progress, 0);
-        const avgProgress = total > 0 ? Math.round(totalProgress / total) : 0;
-        
-        // Mettre à jour l'interface
+        const avgProgress = total > 0 ? Math.round(allObjectives.reduce((sum,o)=>sum+o.progress,0)/total) : 0;
+
         completedObjectives.textContent = `${completed}/${total}`;
         averageProgress.textContent = `${avgProgress}%`;
-        inprogressCount.textContent = total;
+        inprogressCount.textContent = total - completed;
         completedCount.textContent = completed;
-        
-        // Cercle de progression
+
         updateProgressCircle(avgProgress);
-        
-        // Message d'encouragement
-        updateEncouragementMessage(completed, total, avgProgress);
-        
-        // Tendances (simulation)
+        updateEncouragementMessage(completed,total,avgProgress);
         updateTrends();
     }
-    
-    // Mettre à jour le cercle de progression
-    function updateProgressCircle(percentage) {
-        circlePercentage.textContent = `${percentage}%`;
-        progressCircle.style.background = `conic-gradient(#4CAF50 ${percentage}%, #f0f0f0 ${percentage}% 100%)`;
+
+    function updateProgressCircle(percent){
+        circlePercentage.textContent = `${percent}%`;
+        progressCircle.style.background = `conic-gradient(#4CAF50 ${percent}%, #f0f0f0 ${percent}% 100%)`;
     }
-    
-    // Mettre à jour le message d'encouragement
-    function updateEncouragementMessage(completed, total, avgProgress) {
-        let message = '';
-        
-        if (completed === 0) {
-            message = `Vous avez ${completed} objectif complété. La régularité est la clé de la réussite !`;
-        } else if (completed === total) {
-            message = `Félicitations ! Vous avez complété tous vos ${total} objectifs !`;
-        } else if (avgProgress < 30) {
-            message = `Continuez vos efforts ! Vous avez ${completed} objectif complété sur ${total}.`;
-        } else if (avgProgress < 70) {
-            message = `Bon travail ! Vous avez ${completed} objectif complété. Continuez sur cette lancée !`;
-        } else {
-            message = `Excellent ! Vous avez ${completed} objectif complété. Vous êtes presque au bout !`;
-        }
-        
-        encouragementText.innerHTML = message;
+
+    function updateEncouragementMessage(completed,total,avg){
+        let msg='';
+        if(completed===0) msg=`Vous avez ${completed} objectif complété. La régularité est la clé !`;
+        else if(completed===total) msg=`Félicitations ! Vous avez complété tous vos ${total} objectifs !`;
+        else if(avg<30) msg=`Continuez vos efforts ! ${completed} objectif(s) complété(s) sur ${total}.`;
+        else if(avg<70) msg=`Bon travail ! ${completed} objectif(s) complété(s).`;
+        else msg=`Excellent ! ${completed} objectif(s) complété(s). Vous êtes presque au bout !`;
+        encouragementText.innerHTML = msg;
     }
-    
-    // Simuler les tendances
-    function updateTrends() {
-        // Simulation de données
-        const randomTrend = Math.random() > 0.5 ? '+' : '-';
-        const randomPercent = Math.floor(Math.random() * 15) + 1;
+
+    function updateTrends(){
+        const randomTrend = Math.random()>0.5?'+':'-';
+        const randomPercent = Math.floor(Math.random()*15)+1;
         progressTrend.textContent = `${randomTrend}${randomPercent}%`;
-        progressTrend.style.color = randomTrend === '+' ? '#4CAF50' : '#f44336';
-        
-        // Simuler les heures d'étude (entre 30 et 50h)
-        const randomHours = Math.floor(Math.random() * 21) + 30;
+        progressTrend.style.color = randomTrend==='+'?'#4CAF50':'#f44336';
+        const randomHours = Math.floor(Math.random()*21)+30;
         studyHours.textContent = `${randomHours}h`;
     }
-    
-    // Configurer les événements
-    function setupEventListeners() {
-        // Bouton "Ajouter"
-        addObjectiveBtn.addEventListener('click', function() {
-            alert('Fonctionnalité "Ajouter un objectif" - À implémenter dans une future version');
-        });
-        
-        // Délégation d'événements pour les boutons de suppression
-        objectivesList.addEventListener('click', function(e) {
-            if (e.target.closest('.delete-btn')) {
-                const button = e.target.closest('.delete-btn');
-                const objectiveId = button.dataset.id;
-                deleteObjective(objectiveId);
+
+    function setupEventListeners(){
+        addObjectiveBtn.addEventListener('click',()=>alert('Ajouter objectif - À implémenter'));
+
+        objectivesList.addEventListener('click',e=>{
+            if(e.target.closest('.delete-btn')){
+                const id = e.target.closest('.delete-btn').dataset.id;
+                deletePracticeObjective(id);
             }
         });
-        
-        // Écouter les changements dans localStorage (pour les pratiques suivies)
-        window.addEventListener('storage', function(e) {
-            if (e.key.startsWith('medlik_') && e.key.endsWith('_following')) {
+
+        // Écoute des changements dans localStorage
+        window.addEventListener('storage', e=>{
+            if(e.key==='medlik_followed_practices'){
                 loadAllObjectives();
                 updateGlobalStats();
             }
         });
     }
-    
-    // Supprimer un objectif (MP-6 & MP-7)
-    function deleteObjective(objectiveId) {
-        if (confirm('Voulez-vous vraiment supprimer cet objectif de votre suivi ?')) {
-            // Supprimer de localStorage (pour les pratiques suivies)
-            localStorage.removeItem(`medlik_${objectiveId}_following`);
-            
-            // Afficher une notification
+
+    function deletePracticeObjective(id){
+        if(confirm('Voulez-vous vraiment supprimer cet objectif ?')){
+            const practices = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+            const idx = practices.indexOf(id);
+            if(idx!==-1) practices.splice(idx,1);
+            localStorage.setItem('medlik_followed_practices',JSON.stringify(practices));
             showNotification('Objectif supprimé avec succès !');
-            
-            // Recharger la liste
             loadAllObjectives();
             updateGlobalStats();
         }
     }
-    
-    // Notification
-    function showNotification(message) {
-        const notification = document.createElement('div');
-        notification.innerHTML = `
+
+    function showNotification(msg){
+        const notif = document.createElement('div');
+        notif.innerHTML = `
             <div style="
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #f44336;
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 6px;
-                z-index: 1000;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-                animation: slideIn 0.3s ease-out;
-            ">
+                position:fixed;top:20px;right:20px;
+                background:#4CAF50;color:white;padding:1rem 1.5rem;
+                border-radius:6px;display:flex;align-items:center;gap:10px;
+                z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.2);
+                animation:slideIn 0.3s ease-out;">
                 <i class="fas fa-check-circle"></i>
-                <div>
-                    <strong>${message}</strong>
-                    <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">
-                        Votre progression a été mise à jour
-                    </div>
-                </div>
+                <div><strong>${msg}</strong></div>
             </div>
         `;
-        
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
+            @keyframes slideIn {from {transform:translateX(100%);opacity:0;} to{transform:translateX(0);opacity:1;}}
+            @keyframes slideOut {from{transform:translateX(0);opacity:1;} to{transform:translateX(100%);opacity:0;}}
         `;
         document.head.appendChild(style);
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease-out';
-            setTimeout(() => {
-                if (document.body.contains(notification)) {
-                    document.body.removeChild(notification);
-                }
-                if (document.head.contains(style)) {
-                    document.head.removeChild(style);
-                }
-            }, 300);
-        }, 3000);
+        document.body.appendChild(notif);
+        setTimeout(()=>{
+            notif.style.animation='slideOut 0.3s ease-out';
+            setTimeout(()=>{notif.remove();style.remove();},300);
+        },3000);
     }
-    
-    // Vérifier périodiquement les mises à jour
-    setInterval(updateGlobalStats, 5000);
+
+    // Mise à jour périodique
+    setInterval(updateGlobalStats,5000);
+
 });
