@@ -5,304 +5,434 @@
     <title>MEDLik – Bonnes pratiques</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-      <style>
+    <style>
         /* ================= RESET ================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f8fafc;
-    color: #1f2937;
-    line-height: 1.6;
-}
+        body {
+            font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-/* ================= NAVBAR ================= */
-.navbar {
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+        /* ================= NAVBAR ================= */
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-.nav-container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #059669;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #059669;
+        }
 
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
-}
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
 
-.nav-menu a {
-    font-size: 0.95rem;
-    color: #475569;
-    transition: color 0.2s;
-}
+        .nav-menu a {
+            font-size: 0.95rem;
+            color: #475569;
+            transition: color 0.2s;
+        }
 
-.nav-menu a:hover,
-.nav-menu .active a {
-    color: #059669;
-    font-weight: 600;
-}
+        .nav-menu a:hover,
+        .nav-menu .active a {
+            color: #059669;
+            font-weight: 600;
+        }
 
-/* ================= HERO ================= */
-.hero {
-    padding: 5rem 2rem;
-    text-align: center;
-    color: white;
-}
+        /* ================= HERO ================= */
+        .hero {
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
 
-.hero-green {
-    background: linear-gradient(135deg, #059669, #10b981);
-}
+        .hero-green {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
 
-.hero h1 {
-    font-size: 2.3rem;
-    margin-bottom: 1rem;
-}
+        .hero h1 {
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+        }
 
-.hero p {
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: auto;
-    opacity: 0.95;
-}
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: auto;
+            opacity: 0.95;
+        }
 
-/* ================= CONTAINER ================= */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 2.5rem 2rem;
-}
+        /* ================= CONTAINER ================= */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2.5rem 2rem;
+        }
 
-/* ================= BREADCRUMB ================= */
-.breadcrumb {
-    font-size: 0.9rem;
-    color: #64748b;
-    margin-bottom: 2rem;
-}
+        /* ================= BREADCRUMB ================= */
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
 
-.breadcrumb a {
-    color: #059669;
-    font-weight: 500;
-}
+        .breadcrumb a {
+            color: #059669;
+            font-weight: 500;
+        }
 
-/* ================= SECTIONS ================= */
-.practice-section {
-    margin-bottom: 4rem;
-}
+        /* ================= SECTIONS ================= */
+        .practice-section {
+            margin-bottom: 4rem;
+        }
 
-.section-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
 
-.section-header h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.2rem;
-}
+        .section-header h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+        }
 
-.section-header p {
-    font-size: 0.95rem;
-    color: #64748b;
-}
+        .section-header p {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
 
-/* ================= ICONS ================= */
-.icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-}
+        /* ================= ICONS ================= */
+        .icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
 
-.icon.green {
-    background: #dcfce7;
-    color: #059669;
-}
+        .icon.green {
+            background: #dcfce7;
+            color: #059669;
+        }
 
-.icon.blue {
-    background: #dbeafe;
-    color: #2563eb;
-}
+        .icon.blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
 
-.icon.red {
-    background: #fee2e2;
-    color: #dc2626;
-}
+        .icon.red {
+            background: #fee2e2;
+            color: #dc2626;
+        }
 
-/* ================= CARDS ================= */
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
+        /* ================= CARDS ================= */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
 
-.practice-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
+        .practice-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
 
-.practice-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.07);
-}
+        .practice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+        }
 
-.practice-card h3 {
-    font-size: 1.05rem;
-    margin-bottom: 0.5rem;
-}
+        .practice-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-.practice-card p {
-    font-size: 0.9rem;
-    color: #64748b;
-    margin-bottom: 1rem;
-}
+        .practice-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
 
-.practice-card .meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: #475569;
-    margin-bottom: 1rem;
-}
+        .practice-card .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #475569;
+            margin-bottom: 1rem;
+        }
 
-/* ================= BUTTON ================= */
-.practice-card button {
-    width: 100%;
-    padding: 0.55rem;
-    border-radius: 8px;
-    border: none;
-    background: #059669;
-    color: white;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: background 0.2s;
-}
+        /* ====== USER PRACTICE STYLES ====== */
+        .user-practice {
+            border-left: 4px solid #4f46e5;
+        }
 
-.practice-card button:hover {
-    background: #047857;
-}
+        .user-practice-badge {
+            background: #4f46e5;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-left: 8px;
+        }
 
-.practice-card button.followed {
-    background: #16a34a;
-}
+        .category-badge {
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
 
-/* ================= FOOTER ================= */
-.footer {
-    background: linear-gradient(180deg, #0f172a, #020617);
-    color: #cbd5f5;
-    padding: 3.5rem 2rem 1.5rem;
-}
+        /* ====== DELETE BUTTON ====== */
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 10;
+        }
 
-.footer-grid {
-    max-width: 1200px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2.5rem;
-}
+        .practice-card:hover .delete-btn {
+            opacity: 1;
+            transform: scale(1.1);
+        }
 
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 1.2rem;
-    margin-bottom: 0.7rem;
-}
+        .delete-btn:hover {
+            background: #dc2626;
+            transform: scale(1.15);
+        }
 
-.footer p {
-    font-size: 0.9rem;
-    color: #94a3b8;
-}
+        /* ================= BUTTON ================= */
+        .practice-card button.follow-btn {
+            width: 100%;
+            padding: 0.55rem;
+            border-radius: 8px;
+            border: none;
+            background: #059669;
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
 
-.footer h4 {
-    margin-bottom: 0.8rem;
-    color: #e5e7eb;
-}
+        .practice-card button.follow-btn:hover {
+            background: #047857;
+        }
 
-.footer a {
-    display: block;
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-    color: #94a3b8;
-}
+        .practice-card button.follow-btn.followed {
+            background: #16a34a;
+        }
 
-.footer a:hover {
-    color: white;
-}
+        /* ================= FOOTER ================= */
+        .footer {
+            background: linear-gradient(180deg, #0f172a, #020617);
+            color: #cbd5f5;
+            padding: 3.5rem 2rem 1.5rem;
+        }
 
-.socials {
-    display: flex;
-    gap: 0.6rem;
-}
+        .footer-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+        }
 
-.socials i {
-    background: #1e293b;
-    padding: 0.6rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.7rem;
+        }
 
-.socials i:hover {
-    background: #334155;
-}
+        .footer p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
 
-.footer-bottom {
-    text-align: center;
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #1e293b;
-    font-size: 0.85rem;
-    color: #94a3b8;
-}
+        .footer h4 {
+            margin-bottom: 0.8rem;
+            color: #e5e7eb;
+        }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-    }
+        .footer a {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: #94a3b8;
+        }
 
-    .hero h1 {
-        font-size: 1.8rem;
-    }
-}
+        .footer a:hover {
+            color: white;
+        }
 
-      </style>
+        .socials {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .socials i {
+            background: #1e293b;
+            padding: 0.6rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .socials i:hover {
+            background: #334155;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e293b;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* ================= NOTIFICATION ================= */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1001;
+            animation: slideIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .notification.success {
+            background: #10b981;
+        }
+
+        .notification.error {
+            background: #ef4444;
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .practice-card {
+                padding: 1.2rem;
+            }
+
+            .delete-btn {
+                opacity: 1;
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -320,7 +450,8 @@ a {
             <li><a href="../index.html">Accueil</a></li>
             <li class="active"><a href="practices.html">Bonnes pratiques</a></li>
             <li><a href="progress.html">Suivi de progression</a></li>
-            <li><a href="#">Communauté</a></li>
+            <li><a href="publish-practice.html">Publier</a></li>
+            <li><a href="my-practices.html">Mes pratiques</a></li>
             <li><a href="#">Aide</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
@@ -406,7 +537,8 @@ a {
             <a href="../index.html">Accueil</a>
             <a href="practices.html">Bonnes pratiques</a>
             <a href="progress.html">Suivi de progression</a>
-            <a href="#">Communauté</a>
+            <a href="publish-practice.html">Publier une pratique</a>
+            <a href="my-practices.html">Mes pratiques</a>
         </div>
 
         <div>
@@ -434,6 +566,7 @@ a {
 
 <!-- ================= JS ================= -->
 <script>
+// Pratiques par défaut
 const practices = [
     {
         id: 'planning',
@@ -485,9 +618,131 @@ const practices = [
     }
 ];
 
-const followed = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+// Pratiques suivies
+let followed = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
 
-function render() {
+// ================= FONCTIONS PRINCIPALES =================
+
+// Charger les pratiques utilisateur
+function loadUserPractices() {
+    const userPractices = JSON.parse(localStorage.getItem('medlik_practices') || '[]');
+    
+    if (userPractices.length === 0) return;
+    
+    // Mapper les catégories aux sections
+    const categoryToSection = {
+        'planning': 'planning-practices',
+        'memory': 'memory-practices',
+        'stress': 'stress-practices',
+        'exam': 'planning-practices',
+        'other': 'planning-practices'
+    };
+    
+    // Labels pour les catégories
+    const categoryLabels = {
+        'planning': 'Organisation & Planning',
+        'memory': 'Méthodes de mémorisation',
+        'stress': 'Gestion du stress',
+        'exam': 'Techniques d\'examen',
+        'other': 'Autres'
+    };
+    
+    // Labels pour la difficulté
+    const difficultyLabels = {
+        'beginner': 'Débutant',
+        'intermediate': 'Intermédiaire',
+        'advanced': 'Avancé'
+    };
+    
+    userPractices.forEach(practice => {
+        const sectionId = categoryToSection[practice.category] || 'planning-practices';
+        const container = document.getElementById(sectionId);
+        
+        if (!container) return;
+        
+        const isFollowed = followed.includes(practice.id);
+        
+        const card = document.createElement('div');
+        card.className = 'practice-card user-practice';
+        card.innerHTML = `
+            <!-- Bouton de suppression -->
+            <button class="delete-btn" data-id="${practice.id}" title="Supprimer cette pratique">
+                <i class="fas fa-trash"></i>
+            </button>
+            
+            <!-- En-tête -->
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                <h3>
+                    ${practice.title}
+                    <span class="user-practice-badge">Votre pratique</span>
+                </h3>
+                <span class="category-badge">
+                    ${categoryLabels[practice.category] || practice.category}
+                </span>
+            </div>
+            
+            <!-- Description -->
+            <p>${practice.description.substring(0, 120)}${practice.description.length > 120 ? '...' : ''}</p>
+            
+            <!-- Métadonnées -->
+            <div class="meta">
+                <span style="display: flex; align-items: center; gap: 4px;">
+                    <i class="fas fa-layer-group" style="color: #6b7280;"></i>
+                    ${difficultyLabels[practice.difficulty] || practice.difficulty}
+                </span>
+                <span style="display: flex; align-items: center; gap: 4px;">
+                    <i class="fas fa-clock" style="color: #6b7280;"></i>
+                    ${practice.duration || 'Variable'}
+                </span>
+            </div>
+            
+            <!-- Auteur et likes -->
+            <div class="meta" style="margin-bottom: 15px;">
+                <span style="color: #6b7280; font-size: 0.8rem;">
+                    <i class="fas fa-user" style="margin-right: 4px;"></i>
+                    ${practice.author || 'Utilisateur'}
+                </span>
+                <span style="color: #6b7280; font-size: 0.8rem;">
+                    <i class="fas fa-heart" style="margin-right: 4px; color: #ef4444;"></i>
+                    ${practice.likes || 0}
+                </span>
+            </div>
+            
+            <!-- Bouton Suivre -->
+            <button class="follow-btn ${isFollowed ? 'followed' : ''}" data-id="${practice.id}">
+                ${isFollowed ? 'Suivie' : 'Ajouter à mes pratiques'}
+            </button>
+        `;
+        
+        // Gestion du bouton Supprimer
+        const deleteBtn = card.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            deletePractice(practice.id, card);
+        });
+        
+        // Gestion du bouton Suivre
+        const followBtn = card.querySelector('.follow-btn');
+        followBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleFollow(practice.id);
+        });
+        
+        // Clic sur la carte pour voir les détails
+        card.addEventListener('click', (e) => {
+            if (!e.target.closest('.delete-btn') && !e.target.closest('.follow-btn')) {
+                localStorage.setItem('medlik_selected_practice', JSON.stringify(practice));
+                window.location.href = `practice-detail.html?id=${practice.id}`;
+            }
+        });
+        
+        // Ajouter au début de la section
+        container.prepend(card);
+    });
+}
+
+// Rendre les pratiques par défaut
+function renderDefaultPractices() {
     practices.forEach(p => {
         const container = document.getElementById(p.section);
         const isFollowed = followed.includes(p.id);
@@ -501,28 +756,106 @@ function render() {
                 <span>⏱ ${p.duration}</span>
                 <span>⭐ ${p.points}</span>
             </div>
-            <button class="${isFollowed ? 'followed' : ''}">
-                ${isFollowed ? 'Suivie' : 'Ajouter'}
+            <button class="follow-btn ${isFollowed ? 'followed' : ''}" data-id="${p.id}">
+                ${isFollowed ? 'Suivie' : 'Ajouter à mes pratiques'}
             </button>
         `;
 
-        card.querySelector('button').onclick = () => toggle(p.id);
-        card.onclick = () => location.href = `practice-detail.html?id=${p.id}`;
+        // Gestion du bouton Suivre
+        card.querySelector('.follow-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleFollow(p.id);
+        });
+        
+        // Clic sur la carte pour voir les détails
+        card.addEventListener('click', () => {
+            window.location.href = `practice-detail.html?id=${p.id}`;
+        });
 
         container.appendChild(card);
     });
 }
 
-function toggle(id) {
+// Basculer l'état "Suivi"
+function toggleFollow(id) {
     const index = followed.indexOf(id);
-    if (index > -1) followed.splice(index, 1);
-    else followed.push(id);
-
+    if (index > -1) {
+        followed.splice(index, 1);
+    } else {
+        followed.push(id);
+    }
+    
     localStorage.setItem('medlik_followed_practices', JSON.stringify(followed));
-    location.reload();
+    
+    // Mettre à jour tous les boutons avec cet ID
+    document.querySelectorAll(`button[data-id="${id}"]`).forEach(button => {
+        if (followed.includes(id)) {
+            button.textContent = 'Suivie';
+            button.classList.add('followed');
+        } else {
+            button.textContent = 'Ajouter à mes pratiques';
+            button.classList.remove('followed');
+        }
+    });
 }
 
-render();
+// Supprimer une pratique
+function deletePractice(practiceId, cardElement) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette pratique ? Cette action est irréversible.')) {
+        // Supprimer de la liste des pratiques
+        const practices = JSON.parse(localStorage.getItem('medlik_practices') || '[]');
+        const updatedPractices = practices.filter(p => p.id !== practiceId);
+        localStorage.setItem('medlik_practices', JSON.stringify(updatedPractices));
+        
+        // Supprimer de la liste des pratiques suivies
+        const updatedFollowed = followed.filter(id => id !== practiceId);
+        followed = updatedFollowed;
+        localStorage.setItem('medlik_followed_practices', JSON.stringify(updatedFollowed));
+        
+        // Animation de suppression
+        cardElement.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            if (cardElement.parentNode) {
+                cardElement.parentNode.removeChild(cardElement);
+            }
+            showNotification('Pratique supprimée avec succès', 'success');
+        }, 300);
+    }
+}
+
+// Afficher une notification
+function showNotification(message, type = 'success') {
+    // Supprimer les notifications existantes
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(n => n.remove());
+    
+    // Créer la notification
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Supprimer après 3 secondes
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, 3000);
+}
+
+// Initialisation
+function init() {
+    renderDefaultPractices();
+    loadUserPractices();
+}
+
+// Lancer l'initialisation au chargement
+document.addEventListener('DOMContentLoaded', init);
 </script>
 
 </body>

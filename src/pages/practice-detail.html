@@ -3,220 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDLik - Bonne Pratique</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>MEDLik - Détails de la Pratique</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --bg: #f8fafc;
+            --text: #1f2937;
+            --gray: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0; line-height: 1.6;
+        }
+
+        .navbar { background: white; padding: 1rem 2rem; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+        .nav-menu { display: flex; list-style: none; gap: 1.5rem; }
+        .nav-menu a { color: var(--gray); text-decoration: none; font-size: 0.9rem; }
+
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+
+        /* Header Styles */
+        .practice-header { margin-bottom: 2rem; }
+        .practice-header h1 { color: var(--gray); font-size: 1rem; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .practice-header h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--gray); font-size: 1.1rem; }
+
+        .action-buttons { margin-top: 1.5rem; display: flex; gap: 1rem; }
+        .btn-follow { background: var(--primary); color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-weight: 600; }
+        .btn-follow.followed { background: #dc2626; } /* Rouge si on veut "Désuivre" ou un vert différent */
+        .btn-back { background: #e5e7eb; color: var(--text); padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none; }
+
+        /* Progress Section */
+        .progression-section { background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 2rem; }
+        .progress-bar { height: 10px; background: #e5e7eb; border-radius: 5px; margin: 10px 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
+        .progress-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+        .detail-card { background: #f1f5f9; padding: 1rem; border-radius: 8px; text-align: center; }
+        .detail-number { font-size: 1.5rem; font-weight: bold; display: block; }
+
+        /* Content Sections */
+        .section { margin-bottom: 2rem; }
+        .section h3 { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem; font-size: 1.2rem; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .info-item { display: flex; gap: 1rem; background: white; padding: 1rem; border-radius: 8px; border: 1px solid #e5e7eb; }
+        .example-box { background: #f0fdf4; border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 4px; }
+        .numbered-list { padding-left: 1.2rem; }
+        .numbered-list li { margin-bottom: 0.5rem; }
+
+        .footer { background: #0f172a; color: white; padding: 3rem 2rem; margin-top: 4rem; }
+        .footer-grid { max-width: 1100px; margin: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">MEDLik</div>
-            <ul class="nav-menu">
-                <li><a href="../index.html">Accueil</a></li>
-                <li class="active"><a href="practices.html">Bonnes pratiques</a></li>
-                <li><a href="#">Suivi de progression</a></li>
-                <li><a href="#">Communauté</a></li>
-                    <li><a href="pages/conseils.html">Conseils</a></li>
-                <li><a href="#">Aide</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
+    <nav class="navbar">
+        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> MEDLik</div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="practices.html" style="color:var(--primary); font-weight:600;">Bonnes pratiques</a></li>
+            <li><a href="#">Progression</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
     <main class="container">
-        <!-- En-tête -->
         <header class="practice-header">
-            <h1>Techniques d'examen</h1>
-            <h2>Gérer son temps pendant l'épreuve</h2>
-            <p class="subtitle">Optimisez votre temps le jour du concours</p>
-            
-            <!-- Boutons MP-4 & MP-6 -->
+            <h1 id="det-category">Catégorie</h1>
+            <h2 id="det-title">Chargement...</h2>
+            <p class="subtitle" id="det-subtitle">Description courte de la pratique.</p>
             <div class="action-buttons">
                 <button id="follow-btn" class="btn-follow">
                     <i class="far fa-bookmark"></i>
-                    Ajouter à mes objectifs
+                    <span>Ajouter à mes objectifs</span>
                 </button>
-                <a href="practices.html" class="btn-back">
-                    Retour
-                </a>
+                <a href="practices.html" class="btn-back">Retour</a>
             </div>
         </header>
-
-        <!-- MP-7: Section Progression -->
         <section class="progression-section">
-            <h3><i class="fas fa-chart-line"></i> Votre progression</h3>
+            <h3><i class="fas fa-chart-line"></i> Votre progression globale</h3>
+            <div class="progress-container">
+                <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;">
+                    <span>Objectifs complétés</span>
+                    <span id="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
             
-            <div class="progress-visualization">
-                <!-- Barre de progression -->
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>Progression globale</span>
-                        <span id="progress-percentage">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div id="progress-fill" class="progress-fill"></div>
-                    </div>
-                    <div class="progress-stats">
-                        <span id="progress-count">0 sur 10 bonnes pratiques suivies</span>
-                    </div>
+            <div class="progress-details">
+                <div class="detail-card">
+                    <span class="detail-number" id="followed-count" style="color: var(--primary);">0</span>
+                    <span class="detail-label">Suivies</span>
                 </div>
-                
-                <!-- Détails de progression -->
-                <div class="progress-details">
-                    <div class="detail-card">
-                        <div class="detail-icon" style="background: #4CAF50;">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="detail-info">
-                            <div class="detail-number" id="followed-count">0</div>
-                            <div class="detail-label">Suivies</div>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <div class="detail-icon" style="background: #ff9800;">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="detail-info">
-                            <div class="detail-number" id="inprogress-count">3</div>
-                            <div class="detail-label">En cours</div>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <div class="detail-icon" style="background: #f44336;">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <div class="detail-info">
-                            <div class="detail-number" id="remaining-count">10</div>
-                            <div class="detail-label">Restantes</div>
-                        </div>
-                    </div>
+                <div class="detail-card">
+                    <span class="detail-number" id="inprogress-count" style="color: #f59e0b;">0</span>
+                    <span class="detail-label">En cours</span>
                 </div>
-                
-                <!-- Message de statut -->
-                <div class="progress-message" id="progress-message">
-                    <i class="fas fa-info-circle"></i>
-                    <span>Commencez par ajouter des bonnes pratiques à vos objectifs</span>
+                <div class="detail-card">
+                    <span class="detail-number" id="remaining-count">0</span>
+                    <span class="detail-label">Restantes</span>
                 </div>
             </div>
         </section>
-
-        <!-- Description complète -->
         <section class="section">
             <h3><i class="fas fa-align-left"></i> Description complète</h3>
-            <p>Une bonne gestion du temps est essentielle pour répondre à toutes les questions du CNC et maximiser votre score.</p>
+            <p id="det-description">Détails approfondis sur cette méthode...</p>
         </section>
 
-        <hr>
-
-        <!-- Informations -->
-        <section class="section">
-            <h3><i class="fas fa-info-circle"></i> Informations</h3>
-            <div class="info-grid">
-                <div class="info-item">
-                    <div style="font-size: 20px; color: #4a6491;">1️⃣</div>
-                    <div>
-                        <h4>Durée estimée</h4>
-                        <p>S'entraîner sur annales chronométrées</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div style="font-size: 20px; color: #4a6491;">2️⃣</div>
-                    <div>
-                        <h4>Catégorie</h4>
-                        <p>Techniques d'examen</p>
-                    </div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div style="font-size: 1.5rem;">⏱</div>
+                <div>
+                    <h4>Durée / Fréquence</h4>
+                    <p id="det-duration">Non spécifié</p>
                 </div>
             </div>
-        </section>
-
-        <!-- Conseils pratiques - PAGE 1 -->
-        <section class="section">
-            <h3><i class="fas fa-lightbulb"></i> Conseils pratiques</h3>
-            <ol class="numbered-list">
-                <li>Lisez toutes les questions en 5 minutes au début</li>
-                <li>Allouez un temps par question (≈2 min par QCM)</li>
-            </ol>
-        </section>
-
-        <!-- Conseils pratiques - PAGE 2 -->
-        <section class="section">
-            <h3><i class="fas fa-lightbulb"></i> Conseils pratiques (suite)</h3>
-            <ol class="numbered-list" start="3">
-                <li>Commencez par les questions que vous maîtrisez</li>
-                <li>Ne restez pas bloqué plus de 2 minutes sur une question</li>
-                <li>Gardez 15 minutes pour la relecture finale</li>
-            </ol>
-        </section>
-
-        <!-- Exemples concrets -->
-        <section class="section">
-            <h3><i class="fas fa-list-alt"></i> Exemples concrets</h3>
-            <div class="example-box">
-                <h4>Concours de 2h, 60 questions = 2 min max/question</h4>
-                <ul>
-                    <li><span>Lecture initiale :</span> <strong>5 min</strong></li>
-                    <li><span>Questions faciles/moyennes :</span> <strong>1h30</strong></li>
-                    <li><span>Questions difficiles :</span> <strong>20 min</strong></li>
-                    <li><span>Relecture :</span> <strong>15 min</strong></li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Bénéfices -->
-        <section class="section">
-            <h3><i class="fas fa-check-circle"></i> Bénéfices</h3>
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <input type="checkbox" id="benefit1">
-                    <label for="benefit1">Répondre à toutes les questions</label>
-                </div>
-                <div class="benefit-item">
-                    <input type="checkbox" id="benefit2" checked>
-                    <label for="benefit2">Réduction du stress</label>
-                </div>
-                <div class="benefit-item">
-                    <input type="checkbox" id="benefit3">
-                    <label for="benefit3">Score maximal</label>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="practices.html">Bonnes pratiques</a></li>
-                    <li><a href="#">Suivi de progression</a></li>
-                    <li><a href="#">Communauté</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Aide</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Suivez-nous</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+            <div class="info-item">
+                <div style="font-size: 1.5rem;">⭐</div>
+                <div>
+                    <h4>Impact</h4>
+                    <p id="det-points">0 points</p>
                 </div>
             </div>
         </div>
+
+        <section class="section" style="margin-top:2rem;">
+            <h3><i class="fas fa-lightbulb"></i> Conseils pratiques</h3>
+            <ol class="numbered-list" id="det-tips">
+                </ol>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-grid">
+            <div><h4>MEDLik</h4><p>Votre partenaire réussite au CNC.</p></div>
+            <div><h4>Liens</h4><a href="#" style="color:gray">Aide</a></div>
+            <div><h4>Social</h4><i class="fab fa-linkedin"></i></div>
+        </div>
     </footer>
 
-    <!-- Script MP-4, MP-6, MP-7 -->
-    <script src="../js/practice-detail.js"></script>
+    <script>
+        // 1. Base de données étendue pour les détails
+const practicesDb = {
+    'planning': {
+        category: 'Organisation & Planning',
+        title: 'Établir un planning hebdomadaire',
+        subtitle: 'Gérez votre temps comme un pro',
+        desc: 'Un planning structuré permet d\'éviter la procrastination et assure que toutes les matières sont traitées avant l\'examen sans stress de dernière minute.',
+        duration: '30 min / semaine',
+        points: '5 points',
+        tips: ['Listez vos priorités absolues', 'Prévoyez des blocs de pause obligatoires', 'Utilisez un code couleur par matière']
+    },
+    'pareto': {
+        category: 'Organisation & Planning',
+        title: 'Loi de Pareto (80/20)',
+        subtitle: 'Concentrez-vous sur l\'essentiel',
+        desc: '80% de vos résultats d\'examen proviennent de 20% des concepts clés. Apprenez à identifier les chapitres les plus rentables.',
+        duration: '1h / chapitre',
+        points: '5 points',
+        tips: ['Identifiez les sujets qui tombent souvent', 'Maîtrisez les bases avant les détails', 'Apprenez à dire non aux détails inutiles']
+    },
+    'spaced': {
+        category: 'Mémoire',
+        title: 'La répétition espacée',
+        subtitle: 'Apprenez pour la vie, pas pour un jour',
+        desc: 'Cette technique utilise des intervalles de temps croissants entre les révisions pour ancrer l\'information dans la mémoire à long terme.',
+        duration: '20 min / jour',
+        points: '4 points',
+        tips: ['Révisez à J+1, J+7, puis J+30', 'Utilisez des applications comme Anki ou Quizlet', 'Ne révisez que ce que vous oubliez']
+    },
+    'sleep': {
+        category: 'Hygiène de vie',
+        title: 'Sommeil de qualité',
+        subtitle: 'Le cerveau travaille quand vous dormez',
+        desc: 'Le sommeil profond est la phase où le cerveau consolide les connaissances apprises durant la journée. Un manque de sommeil réduit la mémoire de 40%.',
+        duration: '7-8h / nuit',
+        points: '5 points',
+        tips: ['Coupez les écrans 1h avant le coucher', 'Maintenez une chambre fraîche (18°C)', 'Gardez des horaires de réveil fixes']
+    },
+    'breathing': {
+        category: 'Gestion du stress',
+        title: 'Exercices de respiration',
+        subtitle: 'Maîtrisez le stress avec calme',
+        desc: 'La respiration contrôlée (cohérence cardiaque) réduit instantanément le taux de cortisol, l\'hormone du stress, pour une meilleure clarté mentale.',
+        duration: '5-10 min',
+        points: '3 points',
+        tips: ['Inspirez par le nez pendant 4 secondes', 'Expirez lentement par la bouche 8 secondes', 'Pratiquez avant une épreuve difficile']
+    },
+    'flashcards': {
+        category: 'Mémoire',
+        title: 'Utilisation des Flashcards',
+        subtitle: 'Le test actif pour mémoriser vite',
+        desc: 'Plutôt que de relire vos cours, forcez votre cerveau à récupérer l\'information. C\'est la méthode la plus efficace pour les définitions et formules.',
+        duration: '15 min / session',
+        points: '4 points',
+        tips: ['Une seule question par carte', 'Mélangez les paquets de cartes régulièrement', 'Ajoutez des schémas simples au verso']
+    }
+};
+
+// Fonction de chargement dynamique
+function loadDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id') || 'planning'; 
+    const data = practicesDb[id];
+
+    if (!data) {
+        console.error("Astuce non trouvée !");
+        return;
+    }
+
+    // Mise à jour du DOM
+    document.getElementById('bread-cat').innerText = data.category;
+    document.getElementById('bread-title').innerText = data.title;
+    document.getElementById('cat-label').innerText = data.category;
+    document.getElementById('main-title').innerText = data.title;
+    document.getElementById('sub-title').innerText = data.subtitle;
+    document.getElementById('desc-text').innerText = data.desc;
+    document.getElementById('info-duration').innerText = data.duration;
+    document.getElementById('info-points').innerText = data.points;
+
+    const tipsContainer = document.getElementById('tips-container');
+    tipsContainer.innerHTML = ''; 
+    data.tips.forEach((tip, index) => {
+        tipsContainer.innerHTML += `
+            <div class="step-item">
+                <span class="step-number">${index + 1}</span>
+                <p>${tip}</p>
+            </div>
+        `;
+    });
+}
+
+window.onload = loadDetails;
+
+        // 2. Récupérer l'ID depuis l'URL (?id=planning)
+        const params = new URLSearchParams(window.location.search);
+        const practiceId = params.get('id');
+        
+        // 3. Charger les données suivies du LocalStorage
+        let followed = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
+        const totalPractices = 6; // Nombre total de pratiques disponibles
+
+        function updateUI() {
+            const data = practicesDb[practiceId] || practicesDb['planning']; // Fallback si ID non trouvé
+            
+            // Remplir les textes
+            document.getElementById('det-category').textContent = data.category;
+            document.getElementById('det-title').textContent = data.title;
+            document.getElementById('det-subtitle').textContent = data.subtitle;
+            document.getElementById('det-description').textContent = data.desc;
+            document.getElementById('det-duration').textContent = data.duration;
+            document.getElementById('det-points').textContent = data.points;
+
+            // Remplir les conseils
+            const tipsList = document.getElementById('det-tips');
+            tipsList.innerHTML = data.tips.map(tip => `<li>${tip}</li>`).join('');
+
+            // Mise à jour du bouton
+            const btn = document.getElementById('follow-btn');
+            const isFollowed = followed.includes(practiceId);
+            
+            if (isFollowed) {
+                btn.innerHTML = '<i class="fas fa-check"></i> Objectif Suivi';
+                btn.classList.add('followed');
+            } else {
+                btn.innerHTML = '<i class="far fa-bookmark"></i> Ajouter à mes objectifs';
+                btn.classList.remove('followed');
+            }
+
+            // Calcul de la progression
+            const count = followed.length;
+            const percent = Math.round((count / totalPractices) * 100);
+            
+            document.getElementById('progress-percentage').textContent = percent + '%';
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('followed-count').textContent = count;
+            document.getElementById('remaining-count').textContent = totalPractices - count;
+            document.getElementById('inprogress-count').textContent = isFollowed ? 1 : 0; // Exemple simple
+        }
+
+        // 4. Fonction Toggle (Suivre / Ne plus suivre)
+        document.getElementById('follow-btn').onclick = function() {
+            const index = followed.indexOf(practiceId);
+            if (index > -1) {
+                followed.splice(index, 1);
+            } else {
+                followed.push(practiceId);
+            }
+            localStorage.setItem('medlik_followed_practices', JSON.stringify(followed));
+            updateUI();
+        };
+
+        // Initialisation
+        updateUI();
+    </script>
 </body>
 </html>
