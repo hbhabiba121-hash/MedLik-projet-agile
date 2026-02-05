@@ -198,10 +198,22 @@ document.addEventListener('DOMContentLoaded', function() {
             updateGlobalStats();
         }
     }
+    // Rappel quotidien pour compléter les pratiques non complétées
+function reminderForIncompletePractices() {
+    const incomplete = getFollowedPractices().filter(p => !p.completed);
+    if (incomplete.length > 0) {
+        showNotification(`Vous avez ${incomplete.length} pratique(s) à compléter aujourd'hui !`);
+    }
+}
+// Rappel quotidien pour compléter les pratiques non complétées
+reminderForIncompletePractices(); // Appel immédiat au chargement
+setInterval(reminderForIncompletePractices, 24 * 60 * 60 * 1000); // Vérification toutes les 24h
 
-    function showNotification(msg){
-        const notif = document.createElement('div');
-        notif.innerHTML = `
+    
+    // Notification
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.innerHTML = `
             <div style="
                 position:fixed;top:20px;right:20px;
                 background:#4CAF50;color:white;padding:1rem 1.5rem;
