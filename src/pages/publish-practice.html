@@ -3,218 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDLik - Publier une bonne pratique</title>
+    <title>MEDLik | Ajouter une bonne pratique</title>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ====== PAGE LAYOUT ====== */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    color: #0f172a;
+}
+
+.page-header p {
+    color: #64748b;
+}
+
+/* ====== CARDS ====== */
+.card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    color: #1e293b;
+}
+
+/* ====== FORM ====== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+input, textarea, select {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #cbd5f5;
+    font-size: 0.95rem;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+}
+
+/* ====== UPLOAD ====== */
+.upload-area {
+    border: 2px dashed #94a3b8;
+    padding: 30px;
+    text-align: center;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.upload-area i {
+    font-size: 2rem;
+    color: #4f46e5;
+}
+
+/* ====== BUTTONS ====== */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn-primary {
+    background: #4f46e5;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #0f172a;
+    color: #fff;
+}
+
+.btn-cancel {
+    background: #e5e7eb;
+}
+
+.form-actions button {
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+/* ====== FOOTER ====== */
+.footer {
+    background: linear-gradient(180deg,#020617,#020617);
+    color: #cbd5e1;
+    padding: 50px 20px 20px;
+}
+
+.footer-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 30px;
+}
+
+.footer a {
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.socials a {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">MEDLik</div>
-            <ul class="nav-menu">
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>MEDLik</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="practices.html">Bonnes pratiques</a></li>
+            <li><a href="progress.html">Suivi</a></li>
+            <li class="active"><a href="publish-practice.html">Communauté</a></li>
+            <li><a href="#">Aide</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ================= MAIN ================= -->
+<main class="container">
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1><i class="fas fa-share-nodes"></i> Ajouter une bonne pratique</h1>
+        <p>Partage ton expérience et aide la communauté MEDLik à réussir</p>
+    </header>
+
+    <!-- FORM -->
+    <form class="publish-form">
+
+        <!-- SECTION -->
+        <section class="card">
+            <h2><i class="fas fa-circle-info"></i> Informations générales</h2>
+
+            <div class="form-group">
+                <label>Titre *</label>
+                <input type="text" placeholder="Ex : Optimiser son temps pendant le CNC" required>
+            </div>
+
+            <div class="form-group">
+                <label>Catégorie *</label>
+                <select required>
+                    <option value="">-- Choisir une catégorie --</option>
+                    <option>Techniques d’examen</option>
+                    <option>Organisation</option>
+                    <option>Révision</option>
+                    <option>Gestion du stress</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea rows="4" placeholder="Explique clairement ta bonne pratique..." required></textarea>
+            </div>
+        </section>
+
+        <!-- SECTION -->
+        <section class="card">
+            <h2><i class="fas fa-lightbulb"></i> Conseils & étapes</h2>
+
+            <textarea rows="5" placeholder="1. Lire toutes les questions
+2. Commencer par les faciles
+3. Gérer le temps efficacement"></textarea>
+
+            <div class="form-group">
+                <label>Durée estimée</label>
+                <input type="text" placeholder="Ex : 2 semaines">
+            </div>
+        </section>
+
+        <!-- SECTION -->
+        <section class="card upload-card">
+            <h2><i class="fas fa-paperclip"></i> Documents associés</h2>
+
+            <div class="upload-area">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <p>Glissez vos fichiers ici ou cliquez pour parcourir</p>
+                <input type="file" multiple>
+            </div>
+        </section>
+
+        <!-- SECTION -->
+        <section class="card">
+            <h2><i class="fas fa-layer-group"></i> Niveau de difficulté</h2>
+
+            <div class="difficulty">
+                <label><input type="radio" name="level"> Débutant</label>
+                <label><input type="radio" name="level" checked> Intermédiaire</label>
+                <label><input type="radio" name="level"> Avancé</label>
+            </div>
+        </section>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+            <button class="btn-secondary"><i class="fas fa-eye"></i> Prévisualiser</button>
+            <button class="btn-primary"><i class="fas fa-paper-plane"></i> Publier</button>
+            <button class="btn-cancel"><i class="fas fa-xmark"></i> Annuler</button>
+        </div>
+
+    </form>
+</main>
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <div>
+            <div class="footer-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>MEDLik</span>
+            </div>
+            <p>Plateforme de référence pour la préparation au CNC médecine et pharmacie.</p>
+        </div>
+        <div>
+            <h4>Navigation</h4>
+            <ul>
                 <li><a href="../index.html">Accueil</a></li>
                 <li><a href="practices.html">Bonnes pratiques</a></li>
-                <li><a href="progress.html">Suivi de progression</a></li>
-                <li class="active"><a href="publish-practice.html">Communauté</a></li>
-                    <li><a href="pages/conseils.html">Conseils</a></li>
+                <li><a href="progress.html">Suivi</a></li>
+                <li><a href="publish-practice.html">Communauté</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Support</h4>
+            <ul>
                 <li><a href="#">Aide</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </div>
-    </nav>
 
-    <main class="container">
-        <!-- En-tête -->
-        <header class="publish-header">
-            <h1><i class="fas fa-share-square"></i> Publier une bonne pratique</h1>
-            <p class="subtitle">Partagez vos méthodes avec la communauté MEDLik</p>
-        </header>
-
-        <!-- Formulaire MP-36 -->
-        <form id="practice-form" class="publish-form">
-            <!-- Section 1 : Informations de base -->
-            <section class="form-section">
-                <h2><i class="fas fa-info-circle"></i> Informations de base</h2>
-                
-                <div class="form-group">
-                    <label for="practice-title">
-                        <i class="fas fa-heading"></i> Titre de la bonne pratique *
-                    </label>
-                    <input type="text" id="practice-title" required 
-                           placeholder="Ex: Gérer son temps pendant l'épreuve">
-                </div>
-                
-                <div class="form-group">
-                    <label for="practice-category">
-                        <i class="fas fa-folder"></i> Catégorie *
-                    </label>
-                    <select id="practice-category" required>
-                        <option value="">Sélectionnez une catégorie</option>
-                        <option value="techniques-examen">Techniques d'examen</option>
-                        <option value="organisation">Organisation & Planning</option>
-                        <option value="revision">Méthodes de révision</option>
-                        <option value="stress">Gestion du stress</option>
-                        <option value="autres">Autres</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="practice-description">
-                        <i class="fas fa-align-left"></i> Description complète *
-                    </label>
-                    <textarea id="practice-description" rows="4" required
-                              placeholder="Décrivez en détail votre bonne pratique..."></textarea>
-                </div>
-            </section>
-
-            <!-- Section 2 : Conseils pratiques -->
-            <section class="form-section">
-                <h2><i class="fas fa-lightbulb"></i> Conseils pratiques</h2>
-                
-                <div class="form-group">
-                    <label>
-                        <i class="fas fa-list-ol"></i> Étapes / Conseils (un par ligne)
-                    </label>
-                    <textarea id="practice-tips" rows="5"
-                              placeholder="Exemple:
-1. Lisez toutes les questions en 5 minutes
-2. Allouez 2 minutes par question
-3. Commencez par les questions faciles"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="practice-duration">
-                        <i class="fas fa-clock"></i> Durée estimée
-                    </label>
-                    <input type="text" id="practice-duration" 
-                           placeholder="Ex: 2 semaines de pratique">
-                </div>
-            </section>
-
-            <!-- Section 3 : Upload de fichiers MP-37 -->
-            <section class="form-section">
-                <h2><i class="fas fa-paperclip"></i> Documents associés (MP-37)</h2>
-                
-                <div class="upload-area" id="upload-area">
-                    <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #4a6491;"></i>
-                    <h3>Glissez-déposez vos fichiers ici</h3>
-                    <p>ou</p>
-                    <button type="button" class="btn-upload" id="browse-btn">
-                        <i class="fas fa-folder-open"></i> Parcourir les fichiers
-                    </button>
-                    <input type="file" id="file-input" multiple style="display: none;">
-                    <p class="upload-info">
-                        Formats acceptés : images (JPG, PNG), PDF, documents (DOC, DOCX)
-                        <br>Taille maximum : 10MB par fichier
-                    </p>
-                </div>
-                
-                <!-- Liste des fichiers sélectionnés -->
-                <div class="file-list" id="file-list">
-                    <!-- Fichiers apparaîtront ici -->
-                </div>
-            </section>
-
-            <!-- Section 4 : Informations supplémentaires -->
-            <section class="form-section">
-                <h2><i class="fas fa-plus-circle"></i> Informations supplémentaires</h2>
-                
-                <div class="form-group">
-                    <label for="practice-benefits">
-                        <i class="fas fa-check-circle"></i> Bénéfices attendus
-                    </label>
-                    <div class="benefits-input">
-                        <input type="text" id="benefit-input" placeholder="Ajouter un bénéfice">
-                        <button type="button" class btn-small id="add-benefit">
-                            <i class="fas fa-plus"></i> Ajouter
-                        </button>
-                    </div>
-                    <div class="benefits-list" id="benefits-list">
-                        <!-- Bénéfices ajoutés apparaîtront ici -->
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>
-                        <i class="fas fa-user-tag"></i> Niveau de difficulté
-                    </label>
-                    <div class="difficulty-levels">
-                        <label class="difficulty-option">
-                            <input type="radio" name="difficulty" value="beginner">
-                            <span class="difficulty-label beginner">Débutant</span>
-                        </label>
-                        <label class="difficulty-option">
-                            <input type="radio" name="difficulty" value="intermediate" checked>
-                            <span class="difficulty-label intermediate">Intermédiaire</span>
-                        </label>
-                        <label class="difficulty-option">
-                            <input type="radio" name="difficulty" value="advanced">
-                            <span class="difficulty-label advanced">Avancé</span>
-                        </label>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Boutons d'action -->
-            <div class="form-actions">
-                <button type="button" class="btn-secondary" id="preview-btn">
-                    <i class="fas fa-eye"></i> Prévisualiser
-                </button>
-                <button type="submit" class="btn-primary" id="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Publier la bonne pratique
-                </button>
-                <button type="button" class="btn-cancel" id="cancel-btn">
-                    <i class="fas fa-times"></i> Annuler
-                </button>
-            </div>
-        </form>
-
-        <!-- Modal de prévisualisation -->
-        <div class="preview-modal" id="preview-modal">
-            <div class="preview-content">
-                <div class="preview-header">
-                    <h2><i class="fas fa-eye"></i> Prévisualisation</h2>
-                    <button class="close-preview" id="close-preview">&times;</button>
-                </div>
-                <div class="preview-body" id="preview-body">
-                    <!-- Contenu généré dynamiquement -->
-                </div>
+        <div>
+            <h4>Suivez-nous</h4>
+            <div class="socials">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="practices.html">Bonnes pratiques</a></li>
-                    <li><a href="progress.html">Suivi de progression</a></li>
-                    <li><a href="publish-practice.html">Communauté</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Aide</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Suivez-nous</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </div>
 
-    <!-- Script pour la publication -->
-    <script src="../js/publish.js"></script>
+    <div class="footer-bottom">
+        © 2026 MEDLik. Tous droits réservés.
+    </div>
+</footer>
 </body>
 </html>

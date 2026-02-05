@@ -2,126 +2,528 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <title>MEDLik – Bonnes pratiques</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDLik - Bonnes pratiques</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+      <style>
+        /* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f8fafc;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #059669;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.nav-menu a {
+    font-size: 0.95rem;
+    color: #475569;
+    transition: color 0.2s;
+}
+
+.nav-menu a:hover,
+.nav-menu .active a {
+    color: #059669;
+    font-weight: 600;
+}
+
+/* ================= HERO ================= */
+.hero {
+    padding: 5rem 2rem;
+    text-align: center;
+    color: white;
+}
+
+.hero-green {
+    background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.hero h1 {
+    font-size: 2.3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: auto;
+    opacity: 0.95;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2.5rem 2rem;
+}
+
+/* ================= BREADCRUMB ================= */
+.breadcrumb {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+    color: #059669;
+    font-weight: 500;
+}
+
+/* ================= SECTIONS ================= */
+.practice-section {
+    margin-bottom: 4rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
+}
+
+.section-header p {
+    font-size: 0.95rem;
+    color: #64748b;
+}
+
+/* ================= ICONS ================= */
+.icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.icon.green {
+    background: #dcfce7;
+    color: #059669;
+}
+
+.icon.blue {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.icon.red {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* ================= CARDS ================= */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.practice-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.practice-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+}
+
+.practice-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+.practice-card p {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+.practice-card .meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #475569;
+    margin-bottom: 1rem;
+}
+
+/* ================= BUTTON ================= */
+.practice-card button {
+    width: 100%;
+    padding: 0.55rem;
+    border-radius: 8px;
+    border: none;
+    background: #059669;
+    color: white;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.practice-card button:hover {
+    background: #047857;
+}
+
+.practice-card button.followed {
+    background: #16a34a;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    background: linear-gradient(180deg, #0f172a, #020617);
+    color: #cbd5f5;
+    padding: 3.5rem 2rem 1.5rem;
+}
+
+.footer-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.footer h4 {
+    margin-bottom: 0.8rem;
+    color: #e5e7eb;
+}
+
+.footer a {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    color: #94a3b8;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.socials {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.socials i {
+    background: #1e293b;
+    padding: 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.socials i:hover {
+    background: #334155;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1e293b;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+}
+
+      </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">MEDLik</div>
-            <ul class="nav-menu">
-                <li><a href="../index.html">Accueil</a></li>
-                <li class="active"><a href="practices.html">Bonnes pratiques</a></li>
-                <li><a href="progress.html">Suivi de progression</a></li>
-                <li><a href="#">Communauté</a></li>
-                <li><a href="pages/conseils.html">Conseils</a></li>
-                <li><a href="#">Aide</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>MEDLik</span>
         </div>
-    </nav>
 
-    <main class="container" style="padding: 2rem;">
-        <h1 style="color: #2c3e50; margin-bottom: 2rem;">Bonnes pratiques</h1>
-       <div id="practices-list">
-    <div class="practice-card">
-        <a href="practice-detail.html?id=time-management">
-            <strong>Gérer son temps pendant l'épreuve</strong>
-            <span>Techniques d'examen</span>
-        </a>
+        <ul class="nav-menu">
+            <li><a href="../index.html">Accueil</a></li>
+            <li class="active"><a href="practices.html">Bonnes pratiques</a></li>
+            <li><a href="progress.html">Suivi de progression</a></li>
+            <li><a href="#">Communauté</a></li>
+            <li><a href="#">Aide</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero hero-green">
+    <h1>Bonnes pratiques de préparation</h1>
+    <p>
+        Découvrez les méthodes et stratégies éprouvées pour optimiser votre
+        préparation au CNC
+    </p>
+</header>
+
+<!-- ================= CONTENT ================= -->
+<main class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="../index.html">Accueil</a> ›
+        <span>Bonnes pratiques</span>
     </div>
 
-    <div class="practice-card">
-        <a href="practice-detail.html?id=stay-calm">
-            <strong>Rester calme sous pression</strong>
-            <span>Gestion du stress</span>
-        </a>
+    <!-- ========== SECTION 1 ========== -->
+    <section class="practice-section">
+        <div class="section-header">
+            <div class="icon green"><i class="fa-regular fa-calendar"></i></div>
+            <div>
+                <h2>Organisation & Planning</h2>
+                <p>Optimisez votre temps et votre organisation</p>
+            </div>
+        </div>
+
+        <div class="cards-grid" id="planning-practices"></div>
+    </section>
+
+    <!-- ========== SECTION 2 ========== -->
+    <section class="practice-section">
+        <div class="section-header">
+            <div class="icon blue"><i class="fa-solid fa-brain"></i></div>
+            <div>
+                <h2>Méthodes de mémorisation</h2>
+                <p>Techniques éprouvées pour retenir efficacement</p>
+            </div>
+        </div>
+
+        <div class="cards-grid" id="memory-practices"></div>
+    </section>
+
+    <!-- ========== SECTION 3 ========== -->
+    <section class="practice-section">
+        <div class="section-header">
+            <div class="icon red"><i class="fa-regular fa-heart"></i></div>
+            <div>
+                <h2>Gestion du stress</h2>
+                <p>Maintenez un équilibre sain pendant la préparation</p>
+            </div>
+        </div>
+
+        <div class="cards-grid" id="stress-practices"></div>
+    </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-grid">
+
+        <div>
+            <div class="footer-logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <strong>MEDLik</strong>
+            </div>
+            <p>
+                Votre plateforme de référence pour la préparation
+                au CNC médecine et pharmacie.
+            </p>
+        </div>
+
+        <div>
+            <h4>Navigation</h4>
+            <a href="../index.html">Accueil</a>
+            <a href="practices.html">Bonnes pratiques</a>
+            <a href="progress.html">Suivi de progression</a>
+            <a href="#">Communauté</a>
+        </div>
+
+        <div>
+            <h4>Support</h4>
+            <a href="#">Aide</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div>
+            <h4>Suivez-nous</h4>
+            <div class="socials">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-linkedin-in"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+
     </div>
 
-    <div class="practice-card">
-        <a href="practice-detail.html?id=prioritize">
-            <strong>Prioriser les questions faciles</strong>
-            <span>Stratégie</span>
-        </a>
+    <div class="footer-bottom">
+        © 2026 MEDLik. Tous droits réservés.
     </div>
-</div>
+</footer>
 
-    </main>
+<!-- ================= JS ================= -->
+<script>
+const practices = [
+    {
+        id: 'planning',
+        section: 'planning-practices',
+        title: 'Établir un planning hebdomadaire',
+        desc: 'Créez un calendrier réaliste pour couvrir toutes les matières',
+        duration: '30 minutes par semaine',
+        points: 5
+    },
+    {
+        id: 'prioritize',
+        section: 'planning-practices',
+        title: 'Prioriser vos points faibles',
+        desc: 'Concentrez vos efforts sur les chapitres difficiles',
+        duration: 'Variable',
+        points: 4
+    },
+    {
+        id: 'spaced',
+        section: 'memory-practices',
+        title: 'La répétition espacée',
+        desc: 'Révisez au bon moment pour retenir durablement',
+        duration: '15–30 min / jour',
+        points: 4
+    },
+    {
+        id: 'flashcards',
+        section: 'memory-practices',
+        title: 'Fiches de révision synthétiques',
+        desc: 'Condensez les notions clés efficacement',
+        duration: '30–45 min / fiche',
+        points: 5
+    },
+    {
+        id: 'breathing',
+        section: 'stress-practices',
+        title: 'Respiration et relaxation',
+        desc: 'Réduisez le stress grâce à des techniques simples',
+        duration: '5–10 min',
+        points: 3
+    },
+    {
+        id: 'sleep',
+        section: 'stress-practices',
+        title: 'Sommeil de qualité',
+        desc: 'Améliorez mémoire et performance',
+        duration: '7–8 heures / nuit',
+        points: 5
+    }
+];
 
-    <script>
-        // Liste des bonnes pratiques
-        const practices = [
-            { id: 'time-management', title: "Gérer son temps pendant l'épreuve", category: 'Techniques d\'examen', description: 'Optimisez votre temps le jour du concours' },
-            { id: 'read-questions', title: "Lire attentivement les questions", category: 'Techniques d\'examen', description: 'Évitez les erreurs par précipitation' },
-            { id: 'stay-calm', title: "Rester calme sous pression", category: 'Gestion du stress', description: 'Respirez et concentrez-vous' },
-            { id: 'prioritize', title: "Prioriser les questions faciles", category: 'Stratégie', description: 'Gagnez du temps sur les questions difficiles' }
-        ];
+const followed = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
 
-        const practicesListDiv = document.getElementById('practices-list');
+function render() {
+    practices.forEach(p => {
+        const container = document.getElementById(p.section);
+        const isFollowed = followed.includes(p.id);
 
-        function loadPractices() {
-            const followed = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
-            practicesListDiv.innerHTML = '';
-            
-            practices.forEach(practice => {
-                const isFollowed = followed.includes(practice.id);
-                const div = document.createElement('div');
-                div.className = 'practice-card';
-                div.style.cssText = `
-                    padding: 1.5rem; 
-                    border: 1px solid #ddd; 
-                    border-radius: 6px; 
-                    background: ${isFollowed ? '#d4edda' : '#f8f9fa'};
-                    margin-bottom: 1rem; 
-                    cursor: pointer;
-                    display:flex; justify-content:space-between; align-items:center;
-                    transition: all 0.2s;
-                `;
-                div.innerHTML = `
-                    <div>
-                        <h3 style="margin:0 0 0.3rem 0; font-size:1.1rem;">▶ ${practice.title}</h3>
-                        <p style="margin:0; font-size:0.9rem; color:#666;">${practice.category}</p>
-                    </div>
-                    <div>
-                        <button style="
-                            padding: 0.4rem 0.8rem;
-                            border:none; border-radius:4px;
-                            background:${isFollowed?'#28a745':'#2196F3'};
-                            color:white; cursor:pointer;
-                        ">
-                            ${isFollowed ? 'Suivie' : 'Ajouter'}
-                        </button>
-                    </div>
-                `;
-                const btn = div.querySelector('button');
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    toggleFollowPractice(practice.id);
-                });
+        const card = document.createElement('div');
+        card.className = 'practice-card';
+        card.innerHTML = `
+            <h3>${p.title}</h3>
+            <p>${p.desc}</p>
+            <div class="meta">
+                <span>⏱ ${p.duration}</span>
+                <span>⭐ ${p.points}</span>
+            </div>
+            <button class="${isFollowed ? 'followed' : ''}">
+                ${isFollowed ? 'Suivie' : 'Ajouter'}
+            </button>
+        `;
 
-               div.addEventListener('click', () => {
-                   window.location.href = `practice-detail.html?id=${practice.id}`;
-});
+        card.querySelector('button').onclick = () => toggle(p.id);
+        card.onclick = () => location.href = `practice-detail.html?id=${p.id}`;
 
+        container.appendChild(card);
+    });
+}
 
-                practicesListDiv.appendChild(div);
-            });
-        }
+function toggle(id) {
+    const index = followed.indexOf(id);
+    if (index > -1) followed.splice(index, 1);
+    else followed.push(id);
 
-        function toggleFollowPractice(id) {
-            let followed = JSON.parse(localStorage.getItem('medlik_followed_practices')) || [];
-            if(followed.includes(id)){
-                followed = followed.filter(f => f !== id);
-            } else {
-                followed.push(id);
-            }
-            localStorage.setItem('medlik_followed_practices', JSON.stringify(followed));
-            loadPractices();
-        }
+    localStorage.setItem('medlik_followed_practices', JSON.stringify(followed));
+    location.reload();
+}
 
-        loadPractices();
-    </script>
+render();
+</script>
+
 </body>
 </html>
